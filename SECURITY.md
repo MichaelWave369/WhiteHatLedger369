@@ -14,10 +14,12 @@ R2's WhiteHat Gauntlet is a self-contained, simulated training lab: only inert `
 
 R3 adds an **inert browser-only capability ladder** and an optional local Docker smoke test for a fixed harmless checked-in script. Running the local smoke test requires explicit opt-in and control of a trusted Docker daemon. Neither path authorizes executing arbitrary external code or third-party tools.
 
+R4's Ed25519 verifier checks a **signed, frozen training grant** with a public demo key. The signing key is not shipped. Every ALLOW is `ALLOW_FIXTURE_ONLY`, never a capability to run a real tool. Browser verification is not a production access-control or key-management service.
+
 Future **real-target** testing modules must verify written target scope, ownership/consent, time limits, tools, evidence limits, and stop conditions before taking an action.
 
 ## Supported version
 
-- R0 inventory is not a security scanner; R1 is only a limited OSV advisory observation; R2 and the R3 browser ladder are synthetic simulators; R3's separate local Docker runner only checks a bounded benign fixture.
+- R0 inventory is not a security scanner; R1 is only a limited OSV advisory observation; R2 and the R3 browser ladder are synthetic simulators; R3's separate local Docker runner only checks a bounded benign fixture; R4 verifies a signed inert training grant with no tool dispatcher.
 - No build, check, or dashboard badge constitutes a security certification.
 - Vulnerability findings require independently reproducible evidence, a patch or risk-acceptance decision, and a retest receipt.

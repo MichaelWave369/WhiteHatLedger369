@@ -402,3 +402,67 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
   .minotaur-checker button { flex: 1; }
   .minotaur-buttons button { flex: 1 1 auto; }
 }
+
+/* R4 Authority: real verification, deliberately inert demonstration. */
+.authority-section { margin-top: 60px; }
+.authority-badge { white-space: nowrap; background: #152a28; border: 1px solid #4d756b; color: #9be9cb; font: 10px var(--mono); letter-spacing: .8px; padding: 10px 13px; }
+.authority-shell { border: 1px solid #35594b; background: linear-gradient(132deg,#132923,#0d1c22 55%,#0b1b22); box-shadow: inset 0 2px 0 #618e68; }
+.authority-hero { display: grid; grid-template-columns: 1.5fr .8fr; gap: 32px; padding: 34px; }
+.authority-hero h3 { font-size: clamp(29px,3.4vw,42px); letter-spacing: -1.4px; line-height: 1.18; color: #e5f8e9; margin: 13px 0 17px; }
+.authority-hero h3 span { color: #abe5be; }
+.authority-hero p { font-size: 13px; color: #a6beb0; line-height: 1.8; margin: 0; }
+.authority-actions { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 24px; }
+.authority-actions button { padding: 13px 15px; font: 700 10px var(--mono); }
+.authority-actions button:disabled { opacity: .5; }
+.authority-identity { padding: 24px; border: 1px solid #426451; background: #10251f; display: flex; flex-direction: column; gap: 11px; }
+.authority-identity > span { font: 10px var(--mono); color: #a3d8ba; letter-spacing: 1px; }
+.authority-identity > strong { font: 700 17px var(--mono); color: #e1f4db; overflow-wrap: anywhere; }
+.authority-identity code { font: 11px var(--mono); color: #bdcdac; }
+.authority-identity small { color: #8da99c; font-size: 11px; line-height: 1.65; margin-bottom: 5px; }
+.authority-key-state { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; padding-top: 12px; border-top: 1px solid #395749; }
+.authority-key-state span { font: 10px var(--mono); color: #93c7a7; }
+.authority-key-state b { font: 10px var(--mono); color: #e2ecc2; overflow-wrap: anywhere; }
+.authority-notice { background: #2d291e; border-top: 1px solid #6b5c3b; border-bottom: 1px solid #6b5c3b; padding: 16px 30px; }
+.authority-notice strong { font: 10px var(--mono); color: #e4d69e; letter-spacing: .5px; }
+.authority-notice p { color: #c2b99b; font-size: 11px; line-height: 1.6; margin: 8px 0 0; }
+.authority-metrics { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); border-bottom: 1px solid #355747; background: #112420; }
+.authority-metrics > div { padding: 20px 22px; display: flex; flex-direction: column; gap: 12px; border-right: 1px solid #315041; }
+.authority-metrics > div:last-child { border-right: none; }
+.authority-metrics span { font: 10px var(--mono); color: #94bdab; letter-spacing: .5px; }
+.authority-metrics strong { font: 500 29px var(--mono); color: #c5f0c3; }
+.authority-body { display: grid; grid-template-columns: .95fr 1.1fr; }
+.authority-list { border-right: 1px solid #365443; min-width: 0; }
+.authority-case { text-align: left; width: 100%; border: 0; border-bottom: 1px solid #2e4a3a; border-left: 3px solid transparent; background: #0e1f20; color: #e0eadd; padding: 16px; display: flex; gap: 13px; align-items: flex-start; }
+.authority-case:hover { background: #1b3329; }
+.authority-case.active { background: #22392b; border-left-color: #a7eabc; }
+.authority-case > span { font: 11px var(--mono); color: #91bf9c; padding-top: 2px; }
+.authority-case > div { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 6px; }
+.authority-case b { font-size: 12px; }
+.authority-case small { color: #94b0a1; font-size: 11px; line-height: 1.55; }
+.authority-case strong { font: 10px var(--mono); margin-top: 3px; }
+.authority-pass { color: #a4edb5; }
+.authority-fail { color: #f1b5a3; }
+.authority-unrun { color: #718c7e; }
+.authority-inspector { background: #101f22; padding: 27px; min-width: 0; }
+.authority-inspector h4 { color: #e1f4e8; font-size: 22px; margin: 12px 0; }
+.authority-inspector > p { color: #a4b9b0; font-size: 12px; line-height: 1.7; margin: 0 0 20px; }
+.authority-claims { border: 1px solid #375246; background: #142921; }
+.authority-claims div { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; padding: 13px 15px; border-bottom: 1px solid #305044; }
+.authority-claims div:last-child { border-bottom: 0; }
+.authority-claims span { font: 10px var(--mono); color: #8eb6a2; }
+.authority-claims strong { font: 10px var(--mono); color: #c8ddc4; overflow-wrap: anywhere; text-align: right; }
+.authority-outcome,.authority-empty { padding: 16px; margin-top: 18px; font-size: 12px; line-height: 1.7; }
+.authority-outcome { border: 1px solid; }
+.authority-outcome.pass { border-color: #416e4c; background: #1a3226; color: #b9ebc2; }
+.authority-outcome.fail { border-color: #9e654f; background: #39241d; color: #f1c5b0; }
+.authority-outcome p { margin: 8px 0; color: inherit; }
+.authority-outcome strong { font: 11px var(--mono); }
+.authority-outcome small { color: #adc2b0; font: 10px var(--mono); }
+.authority-empty { border: 1px dashed #375b47; color: #9ebcad; }
+.authority-test { border: 1px solid #567d60; background: #294938; color: #c8f4d8; font: 700 10px var(--mono); padding: 14px; margin-top: 14px; width: 100%; }
+.authority-test:hover:not(:disabled) { background: #365b44; }
+.authority-test:disabled { opacity: .5; }
+.authority-footer { padding: 18px 28px; background: #252c22; border-top: 1px solid #5a6c45; color: #d5cba4; font-size: 11px; line-height: 1.7; }
+.authority-footer strong { color: #f1deb0; }
+@media (max-width: 880px) { .authority-hero,.authority-body { grid-template-columns: 1fr; }.authority-list { border-right: 0; border-bottom: 1px solid #365443; } }
+@media (max-width: 590px) { .authority-hero { padding: 22px 17px; }.authority-metrics { grid-template-columns: repeat(2,minmax(0,1fr)); }.authority-metrics > div:nth-child(2) { border-right: none; }.authority-metrics > div:nth-child(-n+2) { border-bottom: 1px solid #315041; }.authority-metrics > div { padding: 17px; }.authority-metrics strong { font-size: 24px; }.authority-notice { padding: 15px 18px; }.authority-inspector { padding: 20px 16px; } }

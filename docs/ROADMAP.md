@@ -28,7 +28,7 @@
 - Truly isolated deliberately vulnerable training apps and patch/retest evidence.
 - No uncontrolled internet targets.
 
-## R3: Minotaur Protocol (PR #13, experimental)
+## R3: Minotaur Protocol (merged in PR #13, experimental)
 - Browser-local, monotonic fixture capability reduction across seven named tiers.
 - Inert policy checks, escalation trace, replayable event sequence, and unsigned observations.
 - Separate, explicitly opt-in **local Docker smoke test** using only one bundled harmless fixture: no network, read-only mounts, no capabilities, unprivileged UID, no-new-privileges, and resource limits.
@@ -38,9 +38,16 @@
 - Dedicated VM/microVM policy, immutable/pinned images, seccomp profiles, secret isolation, measured network-denial verification, signed approvals, and independent adversarial assessment.
 - Separate human authorization required before any real-target or unknown-code execution.
 
-## R4: Agent authority
-- Signed, expiring action grants and operator review.
-- Threat modeling for prompt injection and confused-deputy behavior.
+## R4: Agent Authority (PR #14, signed offline fixture)
+- Verify a **genuine Ed25519-signed**, domain-separated demo grant against a *pinned public fixture key*.
+- Check issuer, audience, simulated agent subject, exact resource, operation, 24-hour lease, and in-memory replay nonce.
+- Seven positive/negative verification scenarios; signature tampering and scoped denials must fail closed.
+- No private key shipped and no agent/tool executed. This is an educational trust-boundary prototype, **not** a production grant broker.
+
+## R4.1 / R4.2: real operator-controlled authority (future, separate review)
+- Production key custody, rotating trust roots, revocation, atomic durable replay detection, monotonic time and actual signed audit trails.
+- Owner consent + operator approvals tied to specific resources/actions/expirations; an independent trusted tool gateway must enforce each decision.
+- Integrate with SuperPhiVessel **only** following explicit owner authorization, threat modeling, and independent security review.
 
 ## R5+: Evidence and release gates
 - Signed artifacts, provenance, custody links, build verification.
