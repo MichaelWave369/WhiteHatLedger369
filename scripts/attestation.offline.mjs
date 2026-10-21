@@ -7,7 +7,10 @@ const ci=readFileSync(new URL('../.github/workflows/ci.yml',import.meta.url),'ut
 
 test('main-only deployment workflow holds attestation issuer privileges',()=>{
   assert.match(pages,/push:\s*\n\s*branches: \[main\]/)
-  assert.match(pages,/jobs:\s*\n\s*build:\s*\n\s*runs-on: ubuntu-latest\s*\n\s*permissions:\s*\n\s*contents: read\s*\n\s*id-token: write\s*\n\s*attestations: write/)
+  const build=pages.split('\n  build:\n')[1]?.split('\n  deploy:\n')[0]
+  assert.ok(build,'Build job must exist before deployment')
+  assert.match(build,/runs-on: ubuntu-latest/)
+  assert.match(build,/permissions:\s*\n\s*contents: read\s*\n\s*id-token: write\s*\n\s*attestations: write/)
   assert.doesNotMatch(pages,/pull_request:/)
   assert.match(ci,/permissions:\s*\n\s*contents: read/)
   assert.doesNotMatch(ci,/id-token: write/)

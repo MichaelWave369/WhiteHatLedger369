@@ -92,3 +92,16 @@ test('configuration confines network reconciliation to first-party domain',()=>{
  assert.match(script,/REMOTE_TARGET_OUT_OF_SCOPE/)
  assert.doesNotMatch(script,/continue-on-error/)
 })
+
+test('deployment custody runs after successful deploy and inherits no signing privileges',()=>{
+ const yaml=readFileSync(new URL('../.github/workflows/pages.yml',import.meta.url),'utf8')
+ const custody=yaml.split('\n  custody:\n')[1]
+ assert.ok(custody)
+ assert.match(custody,/needs: \[build, deploy\]/)
+ assert.match(custody,/permissions:\s*\n\s*contents: read\s*\n\s*attestations: read/)
+ assert.doesNotMatch(custody,/id-token: write/)
+ assert.doesNotMatch(custody,/attestations: write/)
+ assert.match(custody,/EXPECTED_MANIFEST_SHA256: \$\{\{ needs\.build\.outputs\.manifest_sha256 \}\}/)
+ assert.match(custody,/node scripts\/custody-verify\.mjs/)
+ assert.match(custody,/if: always\(\)/)
+})
