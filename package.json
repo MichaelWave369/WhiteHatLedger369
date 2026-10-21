@@ -9,7 +9,7 @@
     "preview": "vite preview",
     "check": "tsc --noEmit",
     "test": "vitest run",
-    "test:sentinel": "node --test scripts/sentinel.test.mjs",
+    "test:sentinel": "node --test scripts/sentinel.offline.mjs",
     "sentinel:scan": "node scripts/sentinel.mjs"
   },
   "dependencies": {
