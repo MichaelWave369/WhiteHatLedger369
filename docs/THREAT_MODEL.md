@@ -106,3 +106,11 @@ R7 introduces a committed npm v3 lockfile, checked for exact manifest-root depen
 **Trust boundary:** A registry SHA-512 value protects package-tarball byte integrity *relative to the committed lockfile*, not package author reputation, malicious maintainer actions, local install scripts, or the actual installed/deployed artifact. Platform-optional packages are lockfile entries, not necessarily installed on the current platform. The report is unsigned and generated inside the same CI trust domain that it documents.
 
 **R6 implications:** full dependency-lock metadata helps future supply-chain assurance but does not independently prove a protected build/runner identity, production SBOM, deploy artifact digest, or third-party attestation. Thus Guardian's production `transitive_sbom` and `deployment_attestation` remain **UNKNOWN**. Any move to PASS requires independently verified provenance, not merely more fields in a JSON report.
+
+## R8 addition: build output integrity vs authentic provenance
+
+R8's local post-build CLI records a sorted list of **all** `dist/` files (excluding `artifact-manifest.json` to avoid self-reference), with SHA-256 digests and exact byte counts. The root hash commits to the canonical list with a domain-separated prefix. The local verifier scans `dist/` again, rejecting missing/extra/modified files, unsupported paths, symlinks, and source manifest/lockfile hash discrepancies. CI and Pages run this after the Vite build.
+
+The browser may re-download all **same-origin** files named by the manifest and recompute every digest. This verifies only equality of website bytes with **that same website's self-published manifest**; the browser does not have an independently anchored source-of-truth and the host could serve manipulated code and matching hashes. Imported external URLs, credentials, and remote targets are not supported.
+
+**Security boundary:** build-file hash consistency is not an authenticated SLSA provenance statement, not signed build-identity attestation, and does not establish that the GitHub Actions runner or deployed backend is trustworthy. A malicious builder can forge the entire manifest or alter the UI itself. R6 Guardian's missing authenticated deployment and owner-consent evidence stays UNKNOWN. A future external signer/trust root is needed before considering independent proof.

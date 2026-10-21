@@ -22,10 +22,12 @@ R6 adds an **advisory-only** release posture based on narrowly bounded source-ma
 
 R7 locks the npm dependency resolution with a checked-in v3 lockfile and verifies integrity metadata before builds. This reduces uncontrolled install drift but does **not** certify packages safe, provide independently signed SBOMs, or attest what was deployed.
 
+R8 fingerprints all built static files and can compare published same-origin bytes against the site's unsigned build manifest. This can find accidental drift but **cannot prove that a malicious publisher, compromised host, or builder did not replace both sides**. R6's attestation evidence remains UNKNOWN.
+
 Future **real-target** testing modules must verify written target scope, ownership/consent, time limits, tools, evidence limits, and stop conditions before taking an action.
 
 ## Supported version
 
-- R0 inventory is not a security scanner; R1 is only a limited OSV advisory observation; R2 and the R3 browser ladder are synthetic simulators; R3's separate local Docker runner only checks a bounded benign fixture; R4 verifies a signed inert training grant with no tool dispatcher; R5 verifies only a frozen, signed synthetic evidence chain; R6 reports incomplete production security evidence without enforcing release blocks; R7 checks lockfile metadata without independently certifying deployments.
+- R0 inventory is not a security scanner; R1 is only a limited OSV advisory observation; R2 and the R3 browser ladder are synthetic simulators; R3's separate local Docker runner only checks a bounded benign fixture; R4 verifies a signed inert training grant with no tool dispatcher; R5 verifies only a frozen, signed synthetic evidence chain; R6 reports incomplete production security evidence without enforcing release blocks; R7 checks lockfile metadata without independently certifying deployments; R8 checks build-file integrity relative to a self-reported manifest without issuer authentication.
 - No build, check, or dashboard badge constitutes a security certification.
 - Vulnerability findings require independently reproducible evidence, a patch or risk-acceptance decision, and a retest receipt.

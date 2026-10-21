@@ -35,5 +35,11 @@ jobs:
           npm run evidence:verify
       - name: Release Guardian policy unit tests (advisory only)
         run: npm run test:guardian
+      - name: Artifact Witness mutation tests (offline)
+        run: npm run test:artifact
       - name: Build
         run: npm run build
+      - name: Stamp and verify exact built files
+        run: |
+          npm run artifact:stamp
+          npm run artifact:verify

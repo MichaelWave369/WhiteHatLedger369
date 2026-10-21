@@ -19,7 +19,10 @@
     "guardian:report": "node scripts/guardian.mjs",
     "test:provenance": "node --test scripts/provenance.offline.mjs",
     "provenance:verify": "node scripts/provenance-check.mjs",
-    "provenance:report": "node scripts/provenance.mjs"
+    "provenance:report": "node scripts/provenance.mjs",
+    "artifact:stamp": "node scripts/artifact.mjs stamp",
+    "artifact:verify": "node scripts/artifact.mjs verify",
+    "test:artifact": "node --test scripts/artifact.offline.mjs"
   },
   "dependencies": {
     "react": "19.1.1",
