@@ -1,0 +1,26 @@
+{
+  "schema": "whitehatledger369.sentinel.v1",
+  "subject": "MichaelWave369/WhiteHatLedger369",
+  "source": {
+    "path": "package.json",
+    "sha256": null,
+    "git_commit": null,
+    "scope": "direct npm dependencies only; not transitive or deployed versions"
+  },
+  "provider": {
+    "name": "OSV.dev",
+    "endpoint": "https://api.osv.dev/v1/querybatch",
+    "status": "not_queried",
+    "note": "Placeholder only. No advisory scan has run in this source checkout."
+  },
+  "generated_at": null,
+  "summary": {
+    "direct_declared": 0,
+    "exact_versions_queried": 0,
+    "matched": 0,
+    "none_reported": 0,
+    "unknown": 0
+  },
+  "packages": [],
+  "disclaimer": "Not scanned. Placeholder, not evidence."
+}
