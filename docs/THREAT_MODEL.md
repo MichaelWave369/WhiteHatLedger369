@@ -68,3 +68,13 @@ All 7/7 passes establish is that bundled fixture tests produced their expected o
 **Risks left open:** Docker daemon access is itself privileged; Docker Desktop and host security settings affect isolation; a locally cached tag is mutable and is *not digest-pinned*; filesystem/in-process checks are not a substitute for independent network, kernel, and seccomp audits; missing protections on some operating systems will make smoke tests fail. This is intentionally not a production isolation API and is inappropriate for attacker-controlled code.
 
 Any future real workload must be confined using a reviewed process/VM isolation design, distinct identities, grant authority, network policy, explicit consent, verified provenance, and operational audit. A visually green simulation cannot satisfy these requirements.
+
+## R4 addition: signed agent-grant **sample** verifier
+
+**Trust anchor:** The R4 browser demo pins one Ed25519 **public fixture key** in source. It verifies a fixed, byte-exact message prefixed by `WHL369-R4-GRANT-V1\\n` (domain separation). A transient one-time signing key produced this sample, and no signing private key was saved or committed. Caller-supplied `keyId` cannot replace the pinned verifier key.
+
+**What it actually proves:** the signed fixture was not modified relative to its signature and pinned public key; the application also checks narrow audience, subject, resource, operations, validity window, and in-memory nonce replay. All ALLOW results are explicitly `ALLOW_FIXTURE_ONLY` with `executed=false`. Nothing reaches a real agent, model, backend, GitHub permission, or tool. Unit tests deliberately mutate signed payload bytes and attempt forbidden operations and targets.
+
+**What it cannot prove:** Identity of a real issuer, operator consent, independent key custody, protection against a modified browser/page, durable revocation, atomic replay protection between devices, monotonic wall time, a secure action dispatcher, or actual SuperPhiVessel integration. The historical fixture clock is *frozen for reproducibility*. It is not a current authorization oracle; this 24-hour sample expires on 2026-10-22 00:00 UTC. The browser itself is an untrusted execution environment and cannot be an authoritative production trust boundary.
+
+**Production non-goals:** no private-key management, permission issuance API, remote agent commands, delegated GitHub tokens, or real scope enforcement. A future backend must independently bind caller identity, scope, owner consent, action execution, trust-root rotation, revocation, tamper-evident logging, and human approvals before real operations can occur.

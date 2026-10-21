@@ -81,6 +81,16 @@ Only operators who trust their local Docker installation should run this. Docker
 
 See [Minotaur isolation boundaries](docs/MINOTAUR.md).
 
+## R4: Agent Authority (Ed25519 verification laboratory)
+
+R4 introduces a **real Ed25519 signature verifier** for a **fixed, signed, 24-hour training fixture** representing a read-only simulated agent grant. A pinned public key is baked into the demo; the one-time signing private key was not stored in the repository, build, or browser.
+
+The verifier checks the signed bytes against the pinned trust anchor, then enforces the exact issuer, audience, subject, resource, operation, `notBefore`, `expiresAt`, and local-session nonce replay rule. The browser does **not** mint grants or execute agents or tools, regardless of the result. The demo uses a **frozen test time, October 21, 2026 at 12:00 UTC**, so expected outcomes stay reproducible even after this sample expires in real time.
+
+Try the **seven signed-fixture scenarios**: valid baseline, altered signed content, untrusted key ID, wrong resource, unauthorized operation, expired grant, and nonce replay. Negative checks must be blocked. The browser does not upload the results or make external calls for R4. See [Agent Authority R4](docs/AUTHORITY.md).
+
+**Crucial distinction:** A trusted signature proves only that some holder of that key signed the specific bytes. It does not by itself establish that the issuer is authorized in your environment, that tools obey the verdict, or that the agent isn't compromised. Real use requires a trusted server-side or OS-isolated execution boundary, independent identity/consent verification, persistent atomic replay state, key revocation/rotation, audit receipts, and human approvals.
+
 ## Run locally
 
 Requires Node.js 22+.
@@ -117,6 +127,6 @@ Read [Security Policy](SECURITY.md), [Threat Model](docs/THREAT_MODEL.md), and [
 - **Public verifier, private keys.**
 - **Unknown is never equivalent to secure.**
 
-The R2 Gauntlet and R3 browser Minotaur are local synthetic exercises, never substitutes for authorized testing of production systems. The R3 optional local Docker fixture performs only a bounded configuration smoke test. The original WhiteHatLedger369 Ethical Reverse Lab master specification was drafted June 20, 2026. R0 implements only the inventory foundation, not the full specification.
+The R2 Gauntlet, R3 browser Minotaur, and R4 agent-grant demo are local exercises, never substitutes for authorized testing of production systems. The R3 optional local Docker fixture performs only a bounded configuration smoke test. The original WhiteHatLedger369 Ethical Reverse Lab master specification was drafted June 20, 2026. R0 implements only the inventory foundation, not the full specification.
 
 MIT licensed. Copyright © 2026 Michael Hughes.
