@@ -76,7 +76,7 @@ export function validateRecoveryProposal(x,{at=null}={}){
     !validDraftFields(Object.fromEntries(payloadFields.map(key=>[key,x[key]])))||x.authority!=='UNSIGNED_OPERATOR_DRAFT_ONLY'||
     typeof x.disclaimer!=='string'||x.disclaimer.length<30||
     typeof x.proposal_id!=='string'||typeof x.payload_sha256!=='string')return {status:'REJECTED',reason:'INVALID_FIELDS_OR_AUTHORITY'}
- const hashValue=sha256(DOMAIN+canonicalRecoveryPayload(x))
+ const hashValue=sha256(DOMAIN+canonicalRecoveryPayload(Object.fromEntries(payloadFields.map(key=>[key,x[key]]))))
  if(x.payload_sha256!==hashValue||x.proposal_id!=='WHL-R12-'+hashValue.slice(0,20))
   return {status:'REJECTED',reason:'DRAFT_DIGEST_MISMATCH'}
  if(at!==null){
