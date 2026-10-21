@@ -23,7 +23,9 @@ test('R12 prepares deterministic non-authoritative review packet with exact refs
  assert.deepEqual(validateRecoveryProposal(a,{at:'2026-10-21T20:00:00.000Z'}),{
    status:'DRAFT_INTEGRITY_MATCH',reason:'UNSIGNED_NON_AUTHORITATIVE_PROPOSAL',authorizes_deployment:false,
  })
- assert.equal(sha256(DOMAIN+canonicalRecoveryPayload(a)),a.payload_sha256)
+ const {proposal_id,payload_sha256,authority,disclaimer,...payload}=a
+ assert.ok(proposal_id&&payload_sha256&&authority&&disclaimer)
+ assert.equal(sha256(DOMAIN+canonicalRecoveryPayload(payload)),a.payload_sha256)
 })
 test('sha mutation, unsigned overrides, unknown fields and forged approval fail closed',()=>{
  const a=createRecoveryProposal(input)
