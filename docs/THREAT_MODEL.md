@@ -40,3 +40,12 @@
 - R4+: agent grants scoped by tool, target, expiry, and operator approval.
 
 The WhiteHatLedger369 master principle is **"Public verifier, private keys."**
+
+
+## R1 addition: scoped OSV advisor
+
+R1 adds a server-side GitHub Actions job that reads **only this checked-out project's package.json**. It sends explicitly declared exact npm package versions to the OSV.dev public querybatch endpoint. GitHub's hosted runner is the execution boundary; no browser token or additional GitHub permissions are requested. A generated public JSON report contains the package names/versions already public in this repository, manifest SHA-256, CI commit, OSV IDs, and timestamp; it never includes private repository information.
+
+**Explicit non-goals:** transitive/lockfile dependencies, deployment runtime versions, package integrity, CVSS calculation, severity classification, scan of any other repository, and active exploitation. A clean OSV response is an advisory observation, not an independent security verification.
+
+Failure modes: OSV failure, timeouts, malformed JSON, incomplete pagination, unpinned dependency, and stale report become **UNKNOWN** in the UI. Staleness cutoff is 48 hours. Scheduled jobs may be delayed by GitHub. Published source hashes are *not digital signatures*; a future proof/custody system must validate them independently. The data published in `public/sentinel-report.json` is overwritten at build time; the checked-in placeholder is never evidence of a completed scan.
