@@ -39,6 +39,8 @@ jobs:
         run: npm run test:artifact
       - name: Attestation workflow safety checks (offline)
         run: npm run test:attestation
+      - name: Post-deploy reconciliation negative controls (offline)
+        run: npm run test:custody
       - name: Build
         run: npm run build
       - name: Stamp and verify exact built files

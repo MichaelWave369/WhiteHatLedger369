@@ -161,6 +161,7 @@ npm run build
 npm run artifact:stamp
 npm run artifact:verify
 npm run test:attestation
+npm run test:custody
 npm run test:artifact
 ```
 
@@ -192,6 +193,28 @@ The page has an R9 "Independent Witness" panel that shows the SHA-256 of the **d
 **Limitations:** A PR green CI check cannot demonstrate attestation issuance. Only a successful **main** Pages run can do that. The attestation binds GitHub's workflow identity to the manifest **bytes**; verifying the separately served static files against the manifest still requires R8. Neither action proves freedom from vulnerabilities, real ownership consent, uncompromised build tools, nor a secure production deploy. R6 Guardian stays advisory and its unresolved evidence remains UNKNOWN.
 
 See [R9 independent build provenance](docs/ATTESTATION.md).
+
+## R10: Public Chain of Custody (post-deploy byte reconciliation)
+
+R10 closes the gap between a **signed build manifest** and the **actual bytes served by GitHub Pages**. R9 already produces a real GitHub/Sigstore attestation for the R8 manifest. R10 adds a **separate post-deployment read-only job** to `.github/workflows/pages.yml`. Once Pages deployment succeeds, that job:
+
+1. Reads the **exact SHA-256 digest of the completed build's manifest** from the build job output. It does **not** substitute whatever digest the public site happens to provide.
+2. Downloads the actual public `artifact-manifest.json` from the fixed, owned GitHub Pages site, verifies its exact digest and expected commit.
+3. Runs GitHub CLI `gh attestation verify` on the **downloaded bytes**, requiring the exact `pages.yml` workflow identity, `refs/heads/main`, **the precise source commit digest**, and disallowing self-hosted runners.
+4. Downloads **every asset listed by the already validated manifest** from the same first-party GitHub Pages origin and verifies each SHA-256 and byte count against it.
+5. Writes an **unsigned custody observation** to the workflow run and reports success or failure, with an explicit link to the evidence and uncertainty in the dashboard.
+
+R10's job is scoped to public files under `https://michaelwave369.github.io/WhiteHatLedger369/` and the associated GitHub attestation service only. It takes no target URL arguments, credentials to other systems, GitHub write permissions, or arbitrary executable scripts.
+
+**Crucial limit:** The reconciliation job runs **after deployment**. Failure marks the post-deploy workflow incomplete/failed, but it cannot magically roll back a site already served. It does not claim the content is vulnerability-free or that the underlying CI runner was uncompromised. R6 Guardian remains broader **advisory only**.
+
+**PR-only CI cannot prove this post-deploy verification succeeded**, because the job only runs after merge and an actual Pages publication. Offline tests verify the matching algorithm, fail-closed controls, and first-party scoping.
+
+```sh
+npm run test:custody
+```
+
+See [R10 Public Chain of Custody](docs/CUSTODY.md).
 
 ## Run locally
 
