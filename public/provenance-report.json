@@ -1,0 +1,29 @@
+{
+  "schema": "whitehatledger369.lock-inventory.v1",
+  "subject": "MichaelWave369/WhiteHatLedger369",
+  "generated_at": null,
+  "source": {
+    "manifest_sha256": null,
+    "lock_sha256": null,
+    "git_commit": null,
+    "environment_node": null,
+    "integrity": "UNSIGNED_CI_SOURCE_CLAIM"
+  },
+  "scope": "Not generated. Lockfile declarations only; not installed or deployed artifacts.",
+  "summary": {
+    "locked_entries": 0,
+    "sha512_integrity": 0,
+    "registry_resolved": 0,
+    "development_entries": 0,
+    "optional_entries": 0,
+    "incomplete": 0
+  },
+  "entries": [],
+  "checks": {
+    "manifest_lock_consistency": "UNKNOWN",
+    "entries_registry_sha512": "UNKNOWN",
+    "installed_tree_attestation": "UNKNOWN",
+    "deployed_artifact_provenance": "UNKNOWN"
+  },
+  "disclaimer": "Placeholder, no validated lockfile report yet. Not proof of deployed dependency integrity."
+}
