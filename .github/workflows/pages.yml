@@ -33,6 +33,7 @@ jobs:
           npm run evidence:verify
           npm run test:guardian
           npm run test:provenance
+          npm run test:artifact
       - name: Generate unsigned, source-linked lockfile inventory
         run: npm run provenance:report
       - name: Generate scoped OSV report (failure = UNKNOWN, not green)
@@ -41,6 +42,10 @@ jobs:
         run: npm run guardian:report
       - name: Build static application
         run: npm run build
+      - name: Fingerprint completed static build and verify each file
+        run: |
+          npm run artifact:stamp
+          npm run artifact:verify
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist

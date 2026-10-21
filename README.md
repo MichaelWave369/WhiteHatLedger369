@@ -150,6 +150,23 @@ npm run provenance:report
 
 See [R7 Supply Chain documentation](docs/PROVENANCE.md).
 
+## R8: Artifact Witness (whole-build integrity)
+
+R8 adds `scripts/artifact-core.mjs`, an **unsigned, deterministic static-build fingerprint**. After `npm run build`, the new `artifact:stamp` command lists **every file in `dist/` other than the manifest itself**, records exact byte sizes and SHA-256 digests, and derives a root SHA-256 over a sorted, canonical file listing. It also records source manifest/lockfile SHA-256 values and an optional GitHub commit claim.
+
+`artifact:verify` independently re-reads the built files and **fails** if any file is changed, removed, added, or replaced by a symlink. CI and GitHub Pages now run **stamp → verify** after building. Mutation tests deliberately corrupt bytes and prove detection.
+
+```sh
+npm run build
+npm run artifact:stamp
+npm run artifact:verify
+npm run test:artifact
+```
+
+The R8 **Artifact Witness** panel loads the published manifest and lets visitors re-download **only same-origin static files** and rehash them in the browser to check their bytes against the self-published manifest. This is a meaningful drift detector, **not independent source authenticity or a signed attestation**. A malicious publisher can change both the manifest and files. The generated manifest is excluded from its own hash inventory to avoid a circular digest; a future third-party signature or external trust anchor is needed to protect it.
+
+R6 Guardian's independently verified deployment attestation remains **UNKNOWN**. No production release is blocked or certified. See [R8 Artifact Witness](docs/ARTIFACT.md).
+
 ## Run locally
 
 Requires Node.js 22+.
@@ -168,7 +185,10 @@ npm run guardian:report
 npm run provenance:verify
 npm run test:provenance
 npm run provenance:report
+npm run test:artifact
 npm run build
+npm run artifact:stamp
+npm run artifact:verify
 ```
 
 Vite uses a `/WhiteHatLedger369/` base path for GitHub Pages. In production, visit `https://michaelwave369.github.io/WhiteHatLedger369/` after Pages deployment succeeds.
