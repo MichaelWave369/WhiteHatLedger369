@@ -16,10 +16,12 @@ R3 adds an **inert browser-only capability ladder** and an optional local Docker
 
 R4's Ed25519 verifier checks a **signed, frozen training grant** with a public demo key. The signing key is not shipped. Every ALLOW is `ALLOW_FIXTURE_ONLY`, never a capability to run a real tool. Browser verification is not a production access-control or key-management service.
 
+R5 adds a signed, hash-linked **synthetic** evidence fixture. It is independently verifiable by local Node.js and the browser, but its issuer key is a demo trust root controlled by this repository. A valid signature does not prove that any real-world claim, patch, or retest happened.
+
 Future **real-target** testing modules must verify written target scope, ownership/consent, time limits, tools, evidence limits, and stop conditions before taking an action.
 
 ## Supported version
 
-- R0 inventory is not a security scanner; R1 is only a limited OSV advisory observation; R2 and the R3 browser ladder are synthetic simulators; R3's separate local Docker runner only checks a bounded benign fixture; R4 verifies a signed inert training grant with no tool dispatcher.
+- R0 inventory is not a security scanner; R1 is only a limited OSV advisory observation; R2 and the R3 browser ladder are synthetic simulators; R3's separate local Docker runner only checks a bounded benign fixture; R4 verifies a signed inert training grant with no tool dispatcher; R5 verifies only a frozen, signed synthetic evidence chain.
 - No build, check, or dashboard badge constitutes a security certification.
 - Vulnerability findings require independently reproducible evidence, a patch or risk-acceptance decision, and a retest receipt.

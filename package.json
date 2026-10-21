@@ -1,7 +1,7 @@
 {
   "name": "whitehatledger369",
   "private": true,
-  "version": "0.5.0",
+  "version": "0.6.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -12,7 +12,9 @@
     "test:sentinel": "node --test scripts/sentinel.offline.mjs",
     "sentinel:scan": "node scripts/sentinel.mjs",
     "test:minotaur": "node --test scripts/minotaur-script.offline.mjs",
-    "minotaur:smoke": "node scripts/minotaur-container.mjs"
+    "minotaur:smoke": "node scripts/minotaur-container.mjs",
+    "test:evidence": "node --test scripts/evidence-verifier.offline.mjs",
+    "evidence:verify": "node scripts/evidence-verify.mjs"
   },
   "dependencies": {
     "react": "19.1.1",

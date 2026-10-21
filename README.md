@@ -91,6 +91,24 @@ Try the **seven signed-fixture scenarios**: valid baseline, altered signed conte
 
 **Crucial distinction:** A trusted signature proves only that some holder of that key signed the specific bytes. It does not by itself establish that the issuer is authorized in your environment, that tools obey the verdict, or that the agent isn't compromised. Real use requires a trusted server-side or OS-isolated execution boundary, independent identity/consent verification, persistent atomic replay state, key revocation/rotation, audit receipts, and human approvals.
 
+## R5: Evidence Ledger (signed sample and dual verifiers)
+
+R5 adds a **cryptographically verified, synthetic hash-linked evidence chain** with three records representing a fictional authorized scope, observation, and retest. Each record is SHA-256 linked to its predecessor. An Ed25519-signed checkpoint commits to the chain's final head. The sample's signing key was generated only to create this fixture; **the signing private key is not published, shipped, or made available to the web UI**.
+
+**Two independent verification paths** check the exact bytes and pinned public demo key:
+
+1. Browser Web Crypto verifier in the R5 Evidence Ledger panel, including local JSON import/export and tamper, deletion, reordering, and forged-checkpoint demonstrations.
+2. Offline Node.js `crypto` verifier with independent canonicalization logic, run by CI.
+
+```sh
+npm run test:evidence
+npm run evidence:verify
+```
+
+Any mismatched hash, unexpected schema/issuer/subject, record removal/reorder, or changed signed checkpoint must be rejected. The verifier **never** trusts a new public key supplied within a JSON report. A copied sample has exactly the same verification result: the signer attested *bytes*, not truth.
+
+**No production claim:** The fixture is entirely synthetic; verification **does not** establish that its text is true, a real system was tested, a security patch occurred, or an external issuer was authorized. Real issuance, protected key custody, independent distribution of trust roots, external ownership/consent checks, transparent publication of revocations, and release gating remain future work. See [R5 Evidence Ledger notes](docs/EVIDENCE.md).
+
 ## Run locally
 
 Requires Node.js 22+.
@@ -102,6 +120,8 @@ npm run check
 npm run test
 npm run test:sentinel
 npm run test:minotaur
+npm run test:evidence
+npm run evidence:verify
 npm run build
 ```
 
@@ -127,6 +147,6 @@ Read [Security Policy](SECURITY.md), [Threat Model](docs/THREAT_MODEL.md), and [
 - **Public verifier, private keys.**
 - **Unknown is never equivalent to secure.**
 
-The R2 Gauntlet, R3 browser Minotaur, and R4 agent-grant demo are local exercises, never substitutes for authorized testing of production systems. The R3 optional local Docker fixture performs only a bounded configuration smoke test. The original WhiteHatLedger369 Ethical Reverse Lab master specification was drafted June 20, 2026. R0 implements only the inventory foundation, not the full specification.
+The R2 Gauntlet, R3 browser Minotaur, R4 agent-grant demo, and R5 Evidence Ledger are synthetic demonstrations, never substitutes for authorized testing of production systems. The R3 optional local Docker fixture performs only a bounded configuration smoke test. The original WhiteHatLedger369 Ethical Reverse Lab master specification was drafted June 20, 2026. R0 implements only the inventory foundation, not the full specification.
 
 MIT licensed. Copyright © 2026 Michael Hughes.
