@@ -1,0 +1,22 @@
+name: Temporary / R7 lockfile bootstrap
+on:
+  push:
+    branches: [feat/r7-supply-chain-provenance]
+permissions:
+  contents: read
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Generate exact resolution snapshot without executing package scripts
+        run: npm install --package-lock-only --ignore-scripts --no-audit --no-fund
+      - name: Emit lockfile for PR-only commit (temporary bootstrap step)
+        run: |
+          echo WHL_R7_LOCKFILE_BEGIN
+          cat package-lock.json
+          echo WHL_R7_LOCKFILE_END
