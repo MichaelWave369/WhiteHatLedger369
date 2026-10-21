@@ -13,6 +13,8 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    outputs:
+      manifest_sha256: ${{ steps.expected.outputs.sha256 }}
     permissions:
       contents: read
       id-token: write
@@ -39,6 +41,7 @@ jobs:
           npm run test:provenance
           npm run test:artifact
           npm run test:attestation
+          npm run test:custody
       - name: Generate unsigned, source-linked lockfile inventory
         run: npm run provenance:report
       - name: Generate scoped OSV report (failure = UNKNOWN, not green)
@@ -51,6 +54,12 @@ jobs:
         run: |
           npm run artifact:stamp
           npm run artifact:verify
+      - name: Record exact expected manifest digest for post-deploy reconciliation
+        id: expected
+        shell: bash
+        run: |
+          set -eu
+          echo "sha256=$(sha256sum dist/artifact-manifest.json | cut -d ' ' -f1)" >> "$GITHUB_OUTPUT"
       # R9: Only this main/scheduled/dispatch Pages build may request
       # a short-lived GitHub OIDC certificate for the completed manifest.
       # The signed subject is the R8 byte inventory, not an assertion
@@ -93,3 +102,30 @@ jobs:
     steps:
       - id: deployment
         uses: actions/deploy-pages@v4
+
+  custody:
+    name: Post-deploy public chain of custody
+    needs: [build, deploy]
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    permissions:
+      contents: read
+      attestations: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Reconcile attested manifest with actual hosted assets
+        env:
+          EXPECTED_MANIFEST_SHA256: ${{ needs.build.outputs.manifest_sha256 }}
+          GH_TOKEN: ${{ github.token }}
+        run: node scripts/custody-verify.mjs
+      - name: Retain unsigned post-deploy verification observation
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: postdeploy-custody-observation
+          path: custody-report.json
+          if-no-files-found: ignore
+          retention-days: 30

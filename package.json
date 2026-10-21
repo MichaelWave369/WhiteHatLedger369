@@ -23,7 +23,8 @@
     "artifact:stamp": "node scripts/artifact.mjs stamp",
     "artifact:verify": "node scripts/artifact.mjs verify",
     "test:artifact": "node --test scripts/artifact.offline.mjs",
-    "test:attestation": "node --test scripts/attestation.offline.mjs"
+    "test:attestation": "node --test scripts/attestation.offline.mjs",
+    "test:custody": "node --test scripts/custody.offline.mjs"
   },
   "dependencies": {
     "react": "19.1.1",
