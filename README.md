@@ -109,6 +109,31 @@ Any mismatched hash, unexpected schema/issuer/subject, record removal/reorder, o
 
 **No production claim:** The fixture is entirely synthetic; verification **does not** establish that its text is true, a real system was tested, a security patch occurred, or an external issuer was authorized. Real issuance, protected key custody, independent distribution of trust roots, external ownership/consent checks, transparent publication of revocations, and release gating remain future work. See [R5 Evidence Ledger notes](docs/EVIDENCE.md).
 
+## R6: Release Guardian (non-blocking, evidence-led policy)
+
+R6 introduces an **advisory-only** policy report covering `MichaelWave369/WhiteHatLedger369`. The Pages workflow generates `guardian-report.json` **after Sentinel's OSV check**. The dashboard shows what can actually be established, with statuses `PASS`, `FAIL`, and `UNKNOWN`.
+
+**Production posture checks** deliberately separate these domains:
+
+- **Direct exact-version npm advisory results:** a fresh, complete, source-matched OSV report with zero findings can PASS **only this narrow advisory condition**. A reported OSV match leads to FAIL/manual triage; missing/stale/partial data produces UNKNOWN.
+- **Transitive dependency tree/SBOM:** UNKNOWN until independently evidenced.
+- **Build and deployment attestation:** UNKNOWN. A CI environment variable is not an authenticated provenance signature.
+- **Signed consent and scope:** UNKNOWN until real owner-issued proof exists.
+- **Live patch and retest receipt:** UNKNOWN. R5's signed synthetic demonstration is not a real retest.
+
+Overall: `FAIL` dominates; otherwise any `UNKNOWN` makes the result `UNKNOWN`. The R5 sample has a separate status and is **never counted as production release evidence**.
+
+The UI includes a small local policy training panel with separate synthetic PASS/UNKNOWN/FAIL examples. These examples cannot modify real reports.
+
+**This is not an active deployment blocker or security certification.** CI still verifies code and publishes Pages, while R6 reports the state of evidence. A future enforcing release gate requires independently anchored signing keys, immutable build provenance, owner consent, release-target identity, and a dedicated security review.
+
+```sh
+npm run test:guardian     # offline policy tests
+npm run guardian:report   # local unsigned advisory JSON, uses fixed files
+```
+
+Details: [Release Guardian R6](docs/GUARDIAN.md).
+
 ## Run locally
 
 Requires Node.js 22+.
@@ -122,6 +147,8 @@ npm run test:sentinel
 npm run test:minotaur
 npm run test:evidence
 npm run evidence:verify
+npm run test:guardian
+npm run guardian:report
 npm run build
 ```
 
@@ -147,6 +174,6 @@ Read [Security Policy](SECURITY.md), [Threat Model](docs/THREAT_MODEL.md), and [
 - **Public verifier, private keys.**
 - **Unknown is never equivalent to secure.**
 
-The R2 Gauntlet, R3 browser Minotaur, R4 agent-grant demo, and R5 Evidence Ledger are synthetic demonstrations, never substitutes for authorized testing of production systems. The R3 optional local Docker fixture performs only a bounded configuration smoke test. The original WhiteHatLedger369 Ethical Reverse Lab master specification was drafted June 20, 2026. R0 implements only the inventory foundation, not the full specification.
+The R2 Gauntlet, R3 browser Minotaur, R4 agent-grant demo, R5 Evidence Ledger is a synthetic demonstration, and R6 Release Guardian is explicitly advisory-only, never substitutes for authorized testing of production systems. The R3 optional local Docker fixture performs only a bounded configuration smoke test. The original WhiteHatLedger369 Ethical Reverse Lab master specification was drafted June 20, 2026. R0 implements only the inventory foundation, not the full specification.
 
 MIT licensed. Copyright © 2026 Michael Hughes.

@@ -6,6 +6,7 @@ import GauntletPanel from './GauntletPanel'
 import MinotaurPanel from './MinotaurPanel'
 import AuthorityPanel from './AuthorityPanel'
 import EvidencePanel from './EvidencePanel'
+import GuardianPanel from './GuardianPanel'
 
 type Filter = 'all' | 'review' | 'active' | 'archived'
 type FetchState = 'loading' | 'ready' | 'error'
@@ -153,7 +154,7 @@ export default function App() {
           <div className="brand-mark"><Mark /></div>
           <div><div className="brand-name">WHITEHAT<span>LEDGER</span><b>369</b></div><div className="brand-caption">ETHICAL REVERSE LAB</div></div>
         </a>
-        <div className="header-right"><span className="header-dot" /> READ-ONLY / PUBLIC DATA <span className="header-version">R5 · EVIDENCE LEDGER</span></div>
+        <div className="header-right"><span className="header-dot" /> READ-ONLY / PUBLIC DATA <span className="header-version">R6 · RELEASE GUARDIAN</span></div>
       </header>
 
       <main className="shell">
@@ -209,8 +210,10 @@ export default function App() {
 
         <EvidencePanel />
 
+        <GuardianPanel />
+
         <section className="repository-section" aria-labelledby="repository-title">
-          <div className="panel-heading"><div><span className="section-index">08 / CATALOG</span><h2 id="repository-title">Asset registry</h2></div><span className="meta-label">{state === 'ready' ? `${filtered.length} MATCHES` : 'AWAITING VERIFIED SNAPSHOT'}</span></div>
+          <div className="panel-heading"><div><span className="section-index">09 / CATALOG</span><h2 id="repository-title">Asset registry</h2></div><span className="meta-label">{state === 'ready' ? `${filtered.length} MATCHES` : 'AWAITING VERIFIED SNAPSHOT'}</span></div>
           <div className="catalog-tools">
             <div className="search-wrap"><span aria-hidden="true">⌕</span><input aria-label="Search repositories" placeholder="Search names, descriptions, languages…" value={search} onChange={(event) => { setSearch(event.target.value); setPage(1) }} disabled={state !== 'ready'} /></div>
             <select aria-label="Filter language" value={language} onChange={(event) => { setLanguage(event.target.value); setPage(1) }} disabled={state !== 'ready'}><option value="all">All languages</option>{languages.map((l) => <option key={l} value={l}>{l}</option>)}</select>
@@ -227,12 +230,12 @@ export default function App() {
         </section>
 
         <section className="next-stage">
-          <span className="section-index">09 / NEXT MISSION</span><h2>From signed samples to accountable releases.</h2>
-          <p>R5 adds independently verified, hash-linked, signed sample receipts with an interactive tamper lab. Next: independently anchored issuer trust, real asset provenance and owner consent, genuine patch/retest records, and release policies that distinguish PASS, FAIL, and UNKNOWN.</p>
-          <div className="stage-steps"><span><b>R0</b> INVENTORY</span><span><b>R1</b> ADVISORIES</span><span><b>R2</b> GAUNTLET</span><span><b>R3</b> MINOTAUR</span><span><b>R4</b> SIGNED FIXTURES</span><span><b>R5</b> SIGNED RECEIPTS</span></div>
+          <span className="section-index">10 / NEXT MISSION</span><h2>From advisory policy to enforceable trust.</h2>
+          <p>R6 reports a non-blocking release posture of PASS, FAIL, or UNKNOWN using narrowly bounded advisory evidence. Real signed ownership scope, immutable dependency provenance, build attestations, and patch/retest receipts remain prerequisites before any production-enforcing gate can be justified.</p>
+          <div className="stage-steps"><span><b>R0</b> INVENTORY</span><span><b>R1</b> ADVISORIES</span><span><b>R2</b> GAUNTLET</span><span><b>R3</b> MINOTAUR</span><span><b>R4</b> SIGNED FIXTURES</span><span><b>R5</b> SIGNED RECEIPTS</span><span><b>R6</b> POLICY ENGINE</span></div>
         </section>
       </main>
-      <footer className="site-footer shell"><div><Mark size={22} /> WHITEHATLEDGER369 <span>·</span> LEDGER ABOVE EGO.</div><p>R0 INVENTORY · R1 SENTINEL · R2 GAUNTLET · R3 MINOTAUR · R4 AUTHORITY · R5 EVIDENCE. NO SECURITY CERTIFICATION. <a href="https://github.com/MichaelWave369/WhiteHatLedger369" target="_blank" rel="noopener noreferrer">SOURCE ↗</a></p></footer>
+      <footer className="site-footer shell"><div><Mark size={22} /> WHITEHATLEDGER369 <span>·</span> LEDGER ABOVE EGO.</div><p>R0 WATCHTOWER · R1 SENTINEL · R2 GAUNTLET · R3 MINOTAUR · R4 AUTHORITY · R5 EVIDENCE · R6 GUARDIAN. NOT CERTIFIED SECURE. <a href="https://github.com/MichaelWave369/WhiteHatLedger369" target="_blank" rel="noopener noreferrer">SOURCE ↗</a></p></footer>
     </div>
   )
 }

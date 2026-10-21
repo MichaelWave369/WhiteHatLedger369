@@ -49,16 +49,23 @@
 - Owner consent + operator approvals tied to specific resources/actions/expirations; an independent trusted tool gateway must enforce each decision.
 - Integrate with SuperPhiVessel **only** following explicit owner authorization, threat modeling, and independent security review.
 
-## R5: Evidence Ledger (PR #15, synthetic signed chain)
+## R5: Evidence Ledger (merged in PR #15, synthetic signed chain)
 - Three synthetic hash-linked scope/observation/retest records, with a real Ed25519-signed checkpoint.
 - A pinned public fixture key, canonicalized bytes, and two **independently implemented** browser/Node verification paths.
 - Deliberate modification, deletion, reordering and checkpoint-forgery tests with fail-closed results.
 - Local JSON import and export for verifying **the fixed demo issuer and target only**; no keys or remote upload.
 
-## R5.1 / R6: production readiness (future, separate review)
-- Independently administered issuer keys, custody receipts, signed scope authorizations, patch/retest provenance, and key revocation.
-- Lockfile/SBOM and deploy receipts with immutable target references.
-- Release gates that distinguish PASS, FAIL, UNKNOWN and never treat an unsigned record as security evidence.
-- **No production release gate is implemented at R5.**
+## R6: The Release Guardian (PR #16, NON-BLOCKING)
+- Deterministic PASS / FAIL / UNKNOWN policy, with FAIL dominating and UNKNOWN never promoting to PASS.
+- Build-time advisory JSON generated from current R1 Sentinel observations and independently verified R5 lab fixture.
+- Source-matched and freshness-bounded direct npm advisory assessment; missing, stale, partial, or mismatched data remains UNKNOWN.
+- R5 demo signature verification shown as a separate synthetic test, explicitly EXCLUDED from production policy.
+- Unknown by design: real owner consent, transitive/SBOM coverage, signed build/deploy attestations, and patch/retest proof.
+- A live dashboard and local policy training cases; GitHub Pages deploy remains **non-blocking**.
+
+## R6.1 / R7: real enforceable assurance (future, separate review)
+- Independently managed issuer keys, revocation, owner-scoped consent receipts, actual patch/retest provenance and verifiable artifact custody.
+- Verified lockfile/SBOM with immutable deployment digests and signer roots distributed outside the audited website.
+- A carefully staged real release gate with human-approved override receipts; *not* automatic until evidence and policy are independently audited.
 
 **Never infer an effective control from a design document alone.** Ship it, exercise it, collect receipts, and retest.

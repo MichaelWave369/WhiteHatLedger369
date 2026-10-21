@@ -29,5 +29,7 @@ jobs:
         run: |
           npm run test:evidence
           npm run evidence:verify
+      - name: Release Guardian policy unit tests (advisory only)
+        run: npm run test:guardian
       - name: Build
         run: npm run build
