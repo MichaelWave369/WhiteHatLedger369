@@ -34,6 +34,22 @@ The source checkout has a **NOT RUN** placeholder report. Only a successful CI/P
 
 See [R1 assurance notes](docs/SENTINEL.md) for limitations and receipt details.
 
+## R2: The WhiteHat Gauntlet (synthetic laboratory)
+
+An **offline, browser-local fixture lab** that challenges a miniature authorization gate. Seven scenarios each run an authorized positive control and a synthetic adversarial probe:
+
+- Request outside the fixture namespace
+- Substituted target not covered by consent scope
+- Expired capability lease
+- Mutation attempt under an observe-only grant
+- Nonce replay
+- Payload modification versus a trusted SHA-256 digest
+- Lower-trust instruction trying to add a tool capability
+
+Click **Run defended gauntlet** to execute the complete suite. Click **Inject replay fault** to intentionally disable the *synthetic* replay rule, causing one scenario to fail. The point is to prove the suite catches a deliberately introduced mistake, not to train or deploy offensive tooling. Export an **unsigned local JSON lab report** containing verdicts and reason codes. The browser does not contact any target, upload tests, run third-party code, or call an AI model.
+
+**IMPORTANT:** These tests exercise only bundled fixture logic. They do not test WhiteHatLedger369 in production, the repositories in Watchtower, or any real software deployment. A 7/7 lab pass is **not** a security certification. See [R2 Gauntlet design](docs/GAUNTLET.md).
+
 ## Run locally
 
 Requires Node.js 22+.
@@ -69,6 +85,6 @@ Read [Security Policy](SECURITY.md), [Threat Model](docs/THREAT_MODEL.md), and [
 - **Public verifier, private keys.**
 - **Unknown is never equivalent to secure.**
 
-The original WhiteHatLedger369 Ethical Reverse Lab master specification was drafted June 20, 2026. R0 implements only the inventory foundation, not the full specification.
+The R2 Gauntlet runs local, inert synthetic exercises and never substitutes for authorized testing of production systems. The original WhiteHatLedger369 Ethical Reverse Lab master specification was drafted June 20, 2026. R0 implements only the inventory foundation, not the full specification.
 
 MIT licensed. Copyright © 2026 Michael Hughes.
