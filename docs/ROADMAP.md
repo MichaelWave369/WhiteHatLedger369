@@ -77,14 +77,21 @@
 - Source manifest/lockfile fingerprints are recorded as untrusted CI claims; unsigned evidence is not an independently anchored attestation.
 - R6 Guardian deployment-attestation policy remains UNKNOWN. No enforcement.
 
-## R9: The Independent Witness (PR #19, native attested manifest)
+## R9: The Independent Witness (merged in PR #19, native attested manifest)
 - GitHub Actions `actions/attest@v4` emits GitHub/Sigstore SLSA provenance for R8's exact built `dist/artifact-manifest.json` after the byte-integrity check.
 - Main-only Pages build job holds scoped attestation/OIDC permissions; ordinary PR CI stays read-only.
 - GitHub CLI independently verifies subject, exact signer workflow and `refs/heads/main` before uploading Pages; failure stops that **build's publication**.
 - Website publishes a verification guide and delivered-manifest SHA-256, explicitly NOT claiming browser-based attestation verification.
 - Authenticity of the manifest does not independently verify deployed asset bytes, source safety, ownership consent, or the Pages host. R6 production Guardian remains advisory.
 
-## R9.1 / R10: real enforceable assurance (future, separate review)
+## R10: Public Chain of Custody (PR #20, post-deploy verifier)
+- Post-deploy GitHub Actions job downloads **actual hosted** manifest, checks its SHA-256 against the exact build job output, verifies GitHub/Sigstore identity and source commit through `gh attestation verify`.
+- Fetches every public hosted file listed by the attested manifest and validates exact SHA-256/byte counts.
+- Negative-control tests cover same-length changes, missing assets, mismatched expected build or signing identity.
+- Public GitHub Actions result metadata appears in read-only UI, not as browser-verified cryptographic trust.
+- Post-deploy failure flags the run; **it cannot roll back an already published website**. No owner approval or vulnerability certification inferred.
+
+## R10.1 / R11: real enforceable assurance (future, separate review)
 - Independently managed issuer keys, revocation, owner-scoped consent receipts, actual patch/retest provenance and verifiable artifact custody.
 - Verified lockfile/SBOM with immutable deployment digests and signer roots distributed outside the audited website.
 - A carefully staged real release gate with human-approved override receipts; *not* automatic until evidence and policy are independently audited.

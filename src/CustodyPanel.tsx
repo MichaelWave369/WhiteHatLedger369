@@ -71,7 +71,7 @@ export default function CustodyPanel(){
       <div>
        <span className="gauntlet-kicker">SIGNED BUILD → PUBLISHED BYTES → RECONCILIATION</span>
        <h3>Trust the delivery.<br/><span>Check the actual bytes.</span></h3>
-       <p>R10 adds a separate GitHub Actions job **after Pages deployment**. It downloads the manifest from the live public site, compares its SHA-256 with the exact build's manifest, verifies the GitHub/Sigstore attestation with the same source commit, then fetches every hosted file and recomputes its hash.</p>
+       <p>R10 adds a separate GitHub Actions job after Pages deployment. It downloads the manifest from the live public site, compares its SHA-256 with the exact build's manifest, verifies the GitHub/Sigstore attestation with the same source commit, then fetches every hosted file and recomputes its hash.</p>
        <p>The runner's public status can be inspected here. To verify cryptographic provenance independently on your own computer, follow R9's GitHub CLI instructions above.</p>
       </div>
       <div className="custody-current">

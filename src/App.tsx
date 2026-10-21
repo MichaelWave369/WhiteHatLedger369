@@ -10,6 +10,7 @@ import GuardianPanel from './GuardianPanel'
 import ProvenancePanel from './ProvenancePanel'
 import ArtifactPanel from './ArtifactPanel'
 import AttestationPanel from './AttestationPanel'
+import CustodyPanel from './CustodyPanel'
 
 type Filter = 'all' | 'review' | 'active' | 'archived'
 type FetchState = 'loading' | 'ready' | 'error'
@@ -157,7 +158,7 @@ export default function App() {
           <div className="brand-mark"><Mark /></div>
           <div><div className="brand-name">WHITEHAT<span>LEDGER</span><b>369</b></div><div className="brand-caption">ETHICAL REVERSE LAB</div></div>
         </a>
-        <div className="header-right"><span className="header-dot" /> READ-ONLY / PUBLIC DATA <span className="header-version">R9 · ATTESTED BUILDS</span></div>
+        <div className="header-right"><span className="header-dot" /> READ-ONLY / PUBLIC DATA <span className="header-version">R10 · CHAIN OF CUSTODY</span></div>
       </header>
 
       <main className="shell">
@@ -221,8 +222,10 @@ export default function App() {
 
         <AttestationPanel />
 
+        <CustodyPanel />
+
         <section className="repository-section" aria-labelledby="repository-title">
-          <div className="panel-heading"><div><span className="section-index">12 / CATALOG</span><h2 id="repository-title">Asset registry</h2></div><span className="meta-label">{state === 'ready' ? `${filtered.length} MATCHES` : 'AWAITING VERIFIED SNAPSHOT'}</span></div>
+          <div className="panel-heading"><div><span className="section-index">13 / CATALOG</span><h2 id="repository-title">Asset registry</h2></div><span className="meta-label">{state === 'ready' ? `${filtered.length} MATCHES` : 'AWAITING VERIFIED SNAPSHOT'}</span></div>
           <div className="catalog-tools">
             <div className="search-wrap"><span aria-hidden="true">⌕</span><input aria-label="Search repositories" placeholder="Search names, descriptions, languages…" value={search} onChange={(event) => { setSearch(event.target.value); setPage(1) }} disabled={state !== 'ready'} /></div>
             <select aria-label="Filter language" value={language} onChange={(event) => { setLanguage(event.target.value); setPage(1) }} disabled={state !== 'ready'}><option value="all">All languages</option>{languages.map((l) => <option key={l} value={l}>{l}</option>)}</select>
@@ -239,12 +242,12 @@ export default function App() {
         </section>
 
         <section className="next-stage">
-          <span className="section-index">13 / NEXT MISSION</span><h2>From signed build identities to accountable releases.</h2>
-          <p>R9 configures GitHub's Sigstore-backed attestation for R8's exact manifest and requires GitHub CLI verification before publishing a new Pages build. External verification becomes possible after the main workflow issues its first attestation. This still does not certify hosted asset delivery, consent or security; real release enforcement remains future work.</p>
-          <div className="stage-steps"><span><b>R0</b> INVENTORY</span><span><b>R1</b> ADVISORIES</span><span><b>R2</b> GAUNTLET</span><span><b>R3</b> MINOTAUR</span><span><b>R4</b> SIGNED FIXTURES</span><span><b>R5</b> SIGNED RECEIPTS</span><span><b>R6</b> POLICY ENGINE</span><span><b>R7</b> DEPENDENCIES</span><span><b>R8</b> BUILD HASHES</span><span><b>R9</b> ATTESTATIONS</span></div>
+          <span className="section-index">14 / NEXT MISSION</span><h2>From public delivery evidence to trusted release decisions.</h2>
+          <p>R10 can compare a live deployed site's served bytes to a manifest independently attested by GitHub. Next: stronger protected branch policy, immutable release references, scoped owner approvals, independent witness retention, and safe recovery procedures. The Guardian's broader security policy remains advisory.</p>
+          <div className="stage-steps"><span><b>R0</b> INVENTORY</span><span><b>R1</b> ADVISORIES</span><span><b>R2</b> GAUNTLET</span><span><b>R3</b> MINOTAUR</span><span><b>R4</b> SIGNED FIXTURES</span><span><b>R5</b> SIGNED RECEIPTS</span><span><b>R6</b> POLICY ENGINE</span><span><b>R7</b> DEPENDENCIES</span><span><b>R8</b> BUILD HASHES</span><span><b>R9</b> ATTESTATIONS</span><span><b>R10</b> CUSTODY</span></div>
         </section>
       </main>
-      <footer className="site-footer shell"><div><Mark size={22} /> WHITEHATLEDGER369 <span>·</span> LEDGER ABOVE EGO.</div><p>R0 WATCHTOWER · R1 SENTINEL · R2 GAUNTLET · R3 MINOTAUR · R4 AUTHORITY · R5 EVIDENCE · R6 GUARDIAN · R7 LOCKFILE · R8 ARTIFACT · R9 ATTESTATION. NOT CERTIFIED SECURE. <a href="https://github.com/MichaelWave369/WhiteHatLedger369" target="_blank" rel="noopener noreferrer">SOURCE ↗</a></p></footer>
+      <footer className="site-footer shell"><div><Mark size={22} /> WHITEHATLEDGER369 <span>·</span> LEDGER ABOVE EGO.</div><p>R0 WATCHTOWER · R1 SENTINEL · R2 GAUNTLET · R3 MINOTAUR · R4 AUTHORITY · R5 EVIDENCE · R6 GUARDIAN · R7 LOCKFILE · R8 ARTIFACT · R9 ATTESTATION · R10 CUSTODY. NOT CERTIFIED SECURE. <a href="https://github.com/MichaelWave369/WhiteHatLedger369" target="_blank" rel="noopener noreferrer">SOURCE ↗</a></p></footer>
     </div>
   )
 }
