@@ -1,8 +1,8 @@
 import {describe,expect,it} from 'vitest'
 import placeholder from '../../public/provenance-report.json'
-import {isProvenanceReport,provenanceIsStale,type ProvenanceReport} from './provenance'
+import {isProvenanceReport,provenanceIsStale,type ProvenanceReport,type LockedPackage} from './provenance'
 
-const entry={
+const entry:LockedPackage={
  path:'node_modules/react',name:'react',version:'19.1.1',license:'MIT',source:'npm-registry',integrity:'sha512',
  integrityValue:'sha512-QUJDRA==',development:false,optional:false,
 }
