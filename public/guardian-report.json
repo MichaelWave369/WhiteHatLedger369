@@ -1,0 +1,22 @@
+{
+  "schema": "whitehatledger369.guardian.v1",
+  "policy": "r6-advisory-2026-10",
+  "subject": "MichaelWave369/WhiteHatLedger369",
+  "generated_at": null,
+  "source": {"commit": null, "manifest_sha256": null, "integrity": "UNATTESTED_CI_ENVIRONMENT_CLAIM"},
+  "mode": "ADVISORY_ONLY",
+  "deployment_blocking": false,
+  "production_release": {
+    "status": "UNKNOWN",
+    "detail": "Not generated yet. This source file is only an unsigned placeholder."
+  },
+  "controls": [],
+  "demonstration": {
+    "id": "demo_receipt_integrity",
+    "label": "Synthetic signed receipt fixture",
+    "status": "UNKNOWN",
+    "detail": "No fixture verification reported.",
+    "scope": "SIMULATED / lab://whitehat369/evidence ONLY"
+  },
+  "disclaimer": "Unsigned advisory placeholder. Not a security clearance or deployment approval."
+}

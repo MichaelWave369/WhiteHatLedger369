@@ -18,10 +18,12 @@ R4's Ed25519 verifier checks a **signed, frozen training grant** with a public d
 
 R5 adds a signed, hash-linked **synthetic** evidence fixture. It is independently verifiable by local Node.js and the browser, but its issuer key is a demo trust root controlled by this repository. A valid signature does not prove that any real-world claim, patch, or retest happened.
 
+R6 adds an **advisory-only** release posture based on narrowly bounded source-matched npm advisory observations. Missing production evidence remains UNKNOWN. R6 **does not block production deployments**, issue security certifications, or accept lab receipts as proof of real-world authorization.
+
 Future **real-target** testing modules must verify written target scope, ownership/consent, time limits, tools, evidence limits, and stop conditions before taking an action.
 
 ## Supported version
 
-- R0 inventory is not a security scanner; R1 is only a limited OSV advisory observation; R2 and the R3 browser ladder are synthetic simulators; R3's separate local Docker runner only checks a bounded benign fixture; R4 verifies a signed inert training grant with no tool dispatcher; R5 verifies only a frozen, signed synthetic evidence chain.
+- R0 inventory is not a security scanner; R1 is only a limited OSV advisory observation; R2 and the R3 browser ladder are synthetic simulators; R3's separate local Docker runner only checks a bounded benign fixture; R4 verifies a signed inert training grant with no tool dispatcher; R5 verifies only a frozen, signed synthetic evidence chain; R6 reports incomplete production security evidence without enforcing release blocks.
 - No build, check, or dashboard badge constitutes a security certification.
 - Vulnerability findings require independently reproducible evidence, a patch or risk-acceptance decision, and a retest receipt.

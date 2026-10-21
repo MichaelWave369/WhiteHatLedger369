@@ -88,3 +88,13 @@ Two independent verification implementations (browser Web Crypto and Node crypto
 Browser code can be modified by a compromised host. A trust root shipped from the same website is **not independently anchored**. Uploaded JSON is read locally, constrained to 64 KB in the UI, and schema/issuer/subject-validated before acceptance. The Node CLI reads only the fixed checked-in fixture. Neither path connects to real repositories or executes agents.
 
 R5 limitations: no protected production signer, issuer PKI, revocation list, trusted wall time, durable anti-replay ledger, real artifact custody, or verified cross-system evidence. A signer can sign a false statement; hash chaining cannot establish whether it is true. Production authority and remediation proof remain **UNKNOWN** until separately verified.
+
+## R6 addition: advisory release policy, not a trusted production gate
+
+R6's build-time Node policy reads only this repository's fixed `package.json`, `public/sentinel-report.json`, and `public/evidence-ledger.json`. It verifies the frozen signed sample with the Node verifier and checks the direct-dependency advisory report's source hash, timestamps, count consistency, and status. There is **no outside target probing, API key, or private repository access** from R6.
+
+**Truthful outcomes:** a complete zero-match OSV advisory report may yield PASS for the narrow *direct npm advisory lookup* condition only. Matches yield FAIL/manual triage, missing/stale/partial data yield UNKNOWN. Missing production controls for signed consent, immutable SBOM, build/deployment attestation, and real patch/retest are hardcoded UNKNOWN. The signed laboratory R5 fixture is an EXCLUDED example and cannot make a production-release policy pass. An unsigned CLI/CI context field is merely a claim, not independent provenance.
+
+**Execution:** the deployment remains non-blocking. A red or unknown Guardian advisory does not automatically stop GitHub Pages publishing. Hard-blocking releases without reliable issuer identity, owner consent, independent signer trust, and an operator appeal process would cause a false sense of assurance or unwanted disruption.
+
+**Unresolved:** a compromised GitHub Action, host, or browser could falsify Guardian's unsigned JSON; self-reported evidence cannot establish system integrity. Genuine enforcement needs a separate trusted control plane, verifiable supply-chain evidence and independently distributed trust anchors.

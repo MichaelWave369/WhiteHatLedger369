@@ -29,8 +29,11 @@ jobs:
           npm run test:minotaur
           npm run test:evidence
           npm run evidence:verify
+          npm run test:guardian
       - name: Generate scoped OSV report (failure = UNKNOWN, not green)
         run: npm run sentinel:scan
+      - name: Generate advisory Release Guardian posture (non-blocking)
+        run: npm run guardian:report
       - name: Build static application
         run: npm run build
       - uses: actions/upload-pages-artifact@v3
