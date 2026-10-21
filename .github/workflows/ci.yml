@@ -16,7 +16,11 @@ jobs:
         with:
           node-version: '22'
       - name: Install pinned dependencies
-        run: npm install --no-fund --no-audit
+        run: npm ci --no-fund --no-audit
+      - name: Verify committed npm lockfile and registry integrity metadata
+        run: npm run provenance:verify
+      - name: Provenance inventory unit tests
+        run: npm run test:provenance
       - name: Typecheck
         run: npm run check
       - name: Test

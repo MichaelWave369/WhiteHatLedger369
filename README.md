@@ -134,12 +134,28 @@ npm run guardian:report   # local unsigned advisory JSON, uses fixed files
 
 Details: [Release Guardian R6](docs/GUARDIAN.md).
 
+## R7: The Dependency Vault (npm lockfile integrity)
+
+R7 replaces floating transitive resolutions at install time with a **committed npm v3 `package-lock.json`**. It was resolved using a Node 22 GitHub Actions runner and checked into this repository, and the one-off bootstrap workflow was removed. CI and GitHub Pages now install using `npm ci` rather than `npm install`. This gives **reproducible dependency resolutions under the same platform/toolchain**, not deterministic identical binary artifacts across machines.
+
+The `scripts/provenance-core.mjs` verifier checks exact `package.json` root and direct dependency declarations against the lockfile. It catalogs the entire lock graph including optional/platform and dev packages, lockfile SHA-256, package version, registry origin, and SHA-512 integrity metadata, then generates a public unsigned report displayed by the **Dependency Vault** panel.
+
+```sh
+npm run provenance:verify
+npm run test:provenance
+npm run provenance:report
+```
+
+**Scope is honest:** this report is a lockfile **declaration**, not a server inspection or signed SBOM. Installed optional packages vary by platform, and the generated report is not independently attested by a trusted signer. Registry integrity hashes alone do not prove that a package is safe, correctly maintained, or free of malicious code. **R6 Guardian's independently verified SBOM and deployment attestation controls remain UNKNOWN** until a separate genuine provenance milestone.
+
+See [R7 Supply Chain documentation](docs/PROVENANCE.md).
+
 ## Run locally
 
 Requires Node.js 22+.
 
 ```sh
-npm install
+npm ci
 npm run dev
 npm run check
 npm run test
@@ -149,6 +165,9 @@ npm run test:evidence
 npm run evidence:verify
 npm run test:guardian
 npm run guardian:report
+npm run provenance:verify
+npm run test:provenance
+npm run provenance:report
 npm run build
 ```
 
