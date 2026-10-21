@@ -98,3 +98,11 @@ R6's build-time Node policy reads only this repository's fixed `package.json`, `
 **Execution:** the deployment remains non-blocking. A red or unknown Guardian advisory does not automatically stop GitHub Pages publishing. Hard-blocking releases without reliable issuer identity, owner consent, independent signer trust, and an operator appeal process would cause a false sense of assurance or unwanted disruption.
 
 **Unresolved:** a compromised GitHub Action, host, or browser could falsify Guardian's unsigned JSON; self-reported evidence cannot establish system integrity. Genuine enforcement needs a separate trusted control plane, verifiable supply-chain evidence and independently distributed trust anchors.
+
+## R7 addition: locked npm dependency declarations
+
+R7 introduces a committed npm v3 lockfile, checked for exact manifest-root dependency equality. CI and Pages now use `npm ci`, reducing unreviewed transitive-resolution drift between runs. The lockfile records resolved versions, platform-optional packages, npm-registry URLs, and SHA-512 subresource integrity metadata. A build-time report uses SHA-256 of both manifest and lockfile to document **claimed checked-out sources**.
+
+**Trust boundary:** A registry SHA-512 value protects package-tarball byte integrity *relative to the committed lockfile*, not package author reputation, malicious maintainer actions, local install scripts, or the actual installed/deployed artifact. Platform-optional packages are lockfile entries, not necessarily installed on the current platform. The report is unsigned and generated inside the same CI trust domain that it documents.
+
+**R6 implications:** full dependency-lock metadata helps future supply-chain assurance but does not independently prove a protected build/runner identity, production SBOM, deploy artifact digest, or third-party attestation. Thus Guardian's production `transitive_sbom` and `deployment_attestation` remain **UNKNOWN**. Any move to PASS requires independently verified provenance, not merely more fields in a JSON report.

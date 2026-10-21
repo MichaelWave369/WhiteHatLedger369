@@ -20,7 +20,9 @@ jobs:
         with:
           node-version: '22'
       - name: Install dependencies
-        run: npm install --no-fund --no-audit
+        run: npm ci --no-fund --no-audit
+      - name: Verify committed lockfile
+        run: npm run provenance:verify
       - name: Verify
         run: |
           npm run check
@@ -30,6 +32,9 @@ jobs:
           npm run test:evidence
           npm run evidence:verify
           npm run test:guardian
+          npm run test:provenance
+      - name: Generate unsigned, source-linked lockfile inventory
+        run: npm run provenance:report
       - name: Generate scoped OSV report (failure = UNKNOWN, not green)
         run: npm run sentinel:scan
       - name: Generate advisory Release Guardian posture (non-blocking)

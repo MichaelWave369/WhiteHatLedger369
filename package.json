@@ -1,7 +1,7 @@
 {
   "name": "whitehatledger369",
   "private": true,
-  "version": "0.7.0",
+  "version": "0.8.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -16,7 +16,10 @@
     "test:evidence": "node --test scripts/evidence-verifier.offline.mjs",
     "evidence:verify": "node scripts/evidence-verify.mjs",
     "test:guardian": "node --test scripts/guardian.offline.mjs",
-    "guardian:report": "node scripts/guardian.mjs"
+    "guardian:report": "node scripts/guardian.mjs",
+    "test:provenance": "node --test scripts/provenance.offline.mjs",
+    "provenance:verify": "node scripts/provenance-check.mjs",
+    "provenance:report": "node scripts/provenance.mjs"
   },
   "dependencies": {
     "react": "19.1.1",
