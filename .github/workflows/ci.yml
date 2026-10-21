@@ -37,6 +37,8 @@ jobs:
         run: npm run test:guardian
       - name: Artifact Witness mutation tests (offline)
         run: npm run test:artifact
+      - name: Attestation workflow safety checks (offline)
+        run: npm run test:attestation
       - name: Build
         run: npm run build
       - name: Stamp and verify exact built files
