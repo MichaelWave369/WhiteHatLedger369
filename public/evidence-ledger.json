@@ -1,0 +1,48 @@
+{
+  "schema": "whitehatledger369.evidence-ledger.v1",
+  "checkpoint": {
+    "schema": "whitehatledger369.checkpoint.v1",
+    "ledgerId": "r5-synthetic-lab-01",
+    "issuer": "whitehat369-r5-demo",
+    "recordCount": 3,
+    "head": "fa84ca16179b67c2f33bf82df6a6a55547e6dfbeb94d5dc656ffd694899a3bdf",
+    "issuedAt": "2026-10-21T12:03:00.000Z"
+  },
+  "signature": "S_iVGVvLeGNe_uUrBT6JMhP6HCWDhqQu3Ku4eJF2KznICRc1IcA9ffqo_sd2Sy25yaKQK6iElbw9dHRTZLurDg",
+  "records": [
+    {
+      "schema": "whitehatledger369.receipt.v1",
+      "sequence": 1,
+      "previous": "GENESIS",
+      "subject": "lab://whitehat369/evidence",
+      "kind": "SCOPE",
+      "summary": "Synthetic lab:// scope recorded; no production target authorized.",
+      "observedAt": "2026-10-21T12:00:00.000Z",
+      "provenance": "SIMULATED",
+      "hash": "b56a5c945193658813557bb1b2e5b50e1947858646f3d05daaa0df9821db637d"
+    },
+    {
+      "schema": "whitehatledger369.receipt.v1",
+      "sequence": 2,
+      "previous": "b56a5c945193658813557bb1b2e5b50e1947858646f3d05daaa0df9821db637d",
+      "subject": "lab://whitehat369/evidence",
+      "kind": "OBSERVATION",
+      "summary": "Synthetic allow/deny fixture results recorded, not a live security test.",
+      "observedAt": "2026-10-21T12:01:00.000Z",
+      "provenance": "SIMULATED",
+      "hash": "276969eb3d387215cd9ff0bdb3b140c7f23bc946a385b7a1ebf4ebefb381e01f"
+    },
+    {
+      "schema": "whitehatledger369.receipt.v1",
+      "sequence": 3,
+      "previous": "276969eb3d387215cd9ff0bdb3b140c7f23bc946a385b7a1ebf4ebefb381e01f",
+      "subject": "lab://whitehat369/evidence",
+      "kind": "RETEST",
+      "summary": "Synthetic regression fixture repeated; no deployed patch was tested.",
+      "observedAt": "2026-10-21T12:02:00.000Z",
+      "provenance": "SIMULATED",
+      "hash": "fa84ca16179b67c2f33bf82df6a6a55547e6dfbeb94d5dc656ffd694899a3bdf"
+    }
+  ],
+  "disclaimer": "Synthetic, signed demonstration only. No real project security assessment, external authorization, or deployed patch is claimed."
+}

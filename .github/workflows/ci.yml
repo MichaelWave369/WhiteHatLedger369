@@ -25,5 +25,9 @@ jobs:
         run: npm run test:sentinel
       - name: Minotaur runner argument tests (no Docker execution)
         run: npm run test:minotaur
+      - name: Independent signed evidence checks
+        run: |
+          npm run test:evidence
+          npm run evidence:verify
       - name: Build
         run: npm run build

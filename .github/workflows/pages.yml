@@ -26,6 +26,9 @@ jobs:
           npm run check
           npm run test
           npm run test:sentinel
+          npm run test:minotaur
+          npm run test:evidence
+          npm run evidence:verify
       - name: Generate scoped OSV report (failure = UNKNOWN, not green)
         run: npm run sentinel:scan
       - name: Build static application

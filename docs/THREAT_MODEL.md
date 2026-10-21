@@ -78,3 +78,13 @@ Any future real workload must be confined using a reviewed process/VM isolation 
 **What it cannot prove:** Identity of a real issuer, operator consent, independent key custody, protection against a modified browser/page, durable revocation, atomic replay protection between devices, monotonic wall time, a secure action dispatcher, or actual SuperPhiVessel integration. The historical fixture clock is *frozen for reproducibility*. It is not a current authorization oracle; this 24-hour sample expires on 2026-10-22 00:00 UTC. The browser itself is an untrusted execution environment and cannot be an authoritative production trust boundary.
 
 **Production non-goals:** no private-key management, permission issuance API, remote agent commands, delegated GitHub tokens, or real scope enforcement. A future backend must independently bind caller identity, scope, owner consent, action execution, trust-root rotation, revocation, tamper-evident logging, and human approvals before real operations can occur.
+
+## R5 addition: signed hash-chain sample and verifier boundaries
+
+R5 introduces **one fixed synthetic 3-record chain** pinned to a publicly committed Ed25519 demo public key. Each record includes sequence, previous hash, kind, exact lab subject, synthetic provenance, timestamp, and summary; SHA-256 covers the canonicalized record fields with an explicit domain prefix. The signed checkpoint covers issuer, ledger ID, record count, head and issue time with a separate domain prefix. A modified, removed, reordered or forged record is rejected.
+
+Two independent verification implementations (browser Web Crypto and Node crypto) deliberately re-implement the same canonical format and trust root. Their successful results demonstrate sample integrity **relative to this code's trust anchor**, not objective truth, security certification, independent authorization, or actual incident handling. The signing private key was ephemeral, and no real issuance system is available.
+
+Browser code can be modified by a compromised host. A trust root shipped from the same website is **not independently anchored**. Uploaded JSON is read locally, constrained to 64 KB in the UI, and schema/issuer/subject-validated before acceptance. The Node CLI reads only the fixed checked-in fixture. Neither path connects to real repositories or executes agents.
+
+R5 limitations: no protected production signer, issuer PKI, revocation list, trusted wall time, durable anti-replay ledger, real artifact custody, or verified cross-system evidence. A signer can sign a false statement; hash chaining cannot establish whether it is true. Production authority and remediation proof remain **UNKNOWN** until separately verified.
