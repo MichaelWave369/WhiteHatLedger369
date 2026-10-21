@@ -1,7 +1,7 @@
 {
   "name": "whitehatledger369",
   "private": true,
-  "version": "0.3.0",
+  "version": "0.4.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -10,7 +10,9 @@
     "check": "tsc --noEmit",
     "test": "vitest run",
     "test:sentinel": "node --test scripts/sentinel.offline.mjs",
-    "sentinel:scan": "node scripts/sentinel.mjs"
+    "sentinel:scan": "node scripts/sentinel.mjs",
+    "test:minotaur": "node --test scripts/minotaur-script.offline.mjs",
+    "minotaur:smoke": "node scripts/minotaur-container.mjs"
   },
   "dependencies": {
     "react": "19.1.1",

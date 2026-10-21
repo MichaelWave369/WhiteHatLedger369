@@ -50,6 +50,37 @@ Click **Run defended gauntlet** to execute the complete suite. Click **Inject re
 
 **IMPORTANT:** These tests exercise only bundled fixture logic. They do not test WhiteHatLedger369 in production, the repositories in Watchtower, or any real software deployment. A 7/7 lab pass is **not** a security certification. See [R2 Gauntlet design](docs/GAUNTLET.md).
 
+## R3: Minotaur Protocol
+
+Minotaur adds a **browser-local seven-stage capability-reduction simulator**:
+
+`NORMAL → WATCH → RESTRICT → SANDBOX → DECOY → ISOLATE → QUARANTINE`
+
+Each synthetic incident advances one tier. Permitted fixture capabilities only shrink; no check dispatches a real tool. A transition ledger and unsigned observation export demonstrate the rules. **The tier names do not confer operating-system isolation.** No actual agent, repository, process, or internet service is constrained by the browser dashboard.
+
+### Optional local Docker isolation smoke test
+
+R3 adds a separate, **opt-in local CLI** that runs only the bundled harmless `lab/minotaur/fixture.mjs` in a container configured with no network, a read-only root filesystem and fixture mount, no effective capabilities, an unprivileged user, no-new-privileges, and CPU/memory/PID limits. The fixture checks observable runtime restrictions and exits nonzero if checks fail.
+
+Docker Desktop (or Docker Engine) and a **locally present, operator-reviewed** `node:22-alpine` image are required. The runner **never pulls images** and never accepts arbitrary user code, image arguments, or target URLs. It is not run by CI or GitHub Pages.
+
+**PowerShell (Windows):**
+```powershell
+docker pull node:22-alpine   # explicitly review image first; one-time operator action
+$env:MINOTAUR_CONFIRM = 'synthetic-only'
+npm run minotaur:smoke
+```
+
+**Bash:**
+```bash
+docker pull node:22-alpine
+MINOTAUR_CONFIRM=synthetic-only npm run minotaur:smoke
+```
+
+Only operators who trust their local Docker installation should run this. Docker daemon control is privileged. A basic container smoke test **does not authorize executing unknown malware, attacker-controlled plugins, or hostile multi-tenant code**. Use an appropriate dedicated VM and professionally reviewed threat model for truly untrusted workloads.
+
+See [Minotaur isolation boundaries](docs/MINOTAUR.md).
+
 ## Run locally
 
 Requires Node.js 22+.
@@ -60,6 +91,7 @@ npm run dev
 npm run check
 npm run test
 npm run test:sentinel
+npm run test:minotaur
 npm run build
 ```
 
@@ -85,6 +117,6 @@ Read [Security Policy](SECURITY.md), [Threat Model](docs/THREAT_MODEL.md), and [
 - **Public verifier, private keys.**
 - **Unknown is never equivalent to secure.**
 
-The R2 Gauntlet runs local, inert synthetic exercises and never substitutes for authorized testing of production systems. The original WhiteHatLedger369 Ethical Reverse Lab master specification was drafted June 20, 2026. R0 implements only the inventory foundation, not the full specification.
+The R2 Gauntlet and R3 browser Minotaur are local synthetic exercises, never substitutes for authorized testing of production systems. The R3 optional local Docker fixture performs only a bounded configuration smoke test. The original WhiteHatLedger369 Ethical Reverse Lab master specification was drafted June 20, 2026. R0 implements only the inventory foundation, not the full specification.
 
 MIT licensed. Copyright © 2026 Michael Hughes.

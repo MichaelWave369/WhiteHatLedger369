@@ -23,5 +23,7 @@ jobs:
         run: npm run test
       - name: Sentinel offline tests
         run: npm run test:sentinel
+      - name: Minotaur runner argument tests (no Docker execution)
+        run: npm run test:minotaur
       - name: Build
         run: npm run build

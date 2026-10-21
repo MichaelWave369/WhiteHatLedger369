@@ -58,3 +58,13 @@ R2 does not cross a production execution boundary. It evaluates **hardcoded trai
 A positive control and adverse probe are evaluated for each scenario. A deliberate `replay-disabled` fault-injection mode must cause at least one scenario to fail. The artifact digest is SHA-256 used for **integrity comparison only**; it is not a digital signature or independent trust anchor. Lower-trust instruction text is inert fixture data and is never sent to a model. Grant checking is illustrative and must not be transplanted into a real agent or auth service without a full threat model, robust identity bindings, authorization, storage, process isolation, and independent security review.
 
 All 7/7 passes establish is that bundled fixture tests produced their expected observations. They say nothing about real-world resilience. Exports are unsigned, unauthenticated, and have no authority outside the local exercise.
+
+## R3 addition: Minotaur policy simulator + optional local container smoke
+
+**Browser boundary:** The R3 ladder is purely a deterministic reducer for fixed simulated incident identifiers and simulated capabilities. The words `SANDBOX`, `DECOY`, `ISOLATE`, and `QUARANTINE` are **status labels, not technical containment controls**. Browser decisions never execute a tool, affect real agents, or add permissions. Exported receipts are unsigned and live under the user's local browser trust boundary.
+
+**Operator machine boundary:** An optional Node.js CLI uses a fixed Docker image name, a fixed source-controlled fixture file, and fixed restrictive runtime arguments. It requires an explicit environment-variable opt-in, checks that an image exists locally, never pulls or accepts arbitrary code, and does not expose a Docker socket inside the container. The fixture reads `/proc`, local mount metadata, network interface names, and tests denial of local writes. No off-host connections occur from the fixture.
+
+**Risks left open:** Docker daemon access is itself privileged; Docker Desktop and host security settings affect isolation; a locally cached tag is mutable and is *not digest-pinned*; filesystem/in-process checks are not a substitute for independent network, kernel, and seccomp audits; missing protections on some operating systems will make smoke tests fail. This is intentionally not a production isolation API and is inappropriate for attacker-controlled code.
+
+Any future real workload must be confined using a reviewed process/VM isolation design, distinct identities, grant authority, network policy, explicit consent, verified provenance, and operational audit. A visually green simulation cannot satisfy these requirements.
