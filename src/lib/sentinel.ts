@@ -64,7 +64,8 @@ export function isSentinelReport(value: unknown): value is SentinelReport {
   if (value.generated_at !== null && (typeof value.generated_at !== 'string' || !Number.isFinite(Date.parse(value.generated_at)))) return false
   if (typeof value.disclaimer !== 'string') return false
   for (const key of ['direct_declared', 'exact_versions_queried', 'matched', 'none_reported', 'unknown']) {
-    if (!Number.isSafeInteger(summary[key]) || (summary[key] as number) < 0) return false
+    const count = summary[key]
+    if (typeof count !== 'number' || !Number.isSafeInteger(count) || count < 0) return false
   }
   if (summary.direct_declared !== packages.length) return false
 
