@@ -163,6 +163,7 @@ npm run artifact:verify
 npm run test:attestation
 npm run test:custody
 npm run test:incident
+npm run test:recovery
 npm run test:artifact
 ```
 
@@ -237,6 +238,21 @@ npm run test:incident
 ```
 
 See [R11 Incident Response](docs/INCIDENT.md).
+
+## R12: Recovery Proposal Forge (manual owner approval, no execution)
+
+R12 adds an interactive **browser-local proposal studio** and independent Node verification for **unsigned recovery review drafts**. A draft binds the R11 incident ID, run number, original commit and manifest SHA-256 to a distinct 40-character recovery candidate commit and 64-character build-manifest SHA-256. Operator reason, potential user impact and a bounded review deadline are part of the fixed canonical JSON; SHA-256 fingerprints the entire draft.
+
+The studio can **export** a local JSON proposal or check another local R12 JSON for self-consistency, time limit and fixed scope without uploading the file. The Node verifier checks the same schema and fingerprint:
+
+```sh
+npm run test:recovery
+node scripts/recovery-verify.mjs path/to/draft.json
+```
+
+**This is NOT a signed owner approval and has no execution capability.** The immutable *references* are exact commit/digest strings, but they are **operator input**, not independently verified release provenance. Anyone can recompute a plain SHA-256 digest; R12 signatures and owner identity are deliberately **not implemented**. Drafts remain `NOT_GRANTED_REQUIRES_INDEPENDENT_OWNER_AUTHORIZATION`, `UNVERIFIED_OPERATOR_CANDIDATE`, `DISABLED_NO_TOOL_ACCESS`. There is **no GitHub write token, rollback, auto-deployment, issue creation or incident closure**.
+
+The R11 incident packet must be separately inspected, the candidate source/build provenance verified independently, and the asset owner must authorize any real recovery with trustworthy evidence. The existing R10 deployed-byte custody control remains separate. See [R12 Recovery Review](docs/RECOVERY.md).
 
 ## Run locally
 

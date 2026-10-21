@@ -43,6 +43,7 @@ jobs:
           npm run test:attestation
           npm run test:custody
           npm run test:incident
+          npm run test:recovery
       - name: Generate unsigned, source-linked lockfile inventory
         run: npm run provenance:report
       - name: Generate scoped OSV report (failure = UNKNOWN, not green)

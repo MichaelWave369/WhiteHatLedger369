@@ -142,3 +142,11 @@ Three classifications exist: an internally consistent R10 byte-match observation
 The public dashboard uses unauthenticated, read-only GitHub Actions metadata. It may be incomplete or rate limited. GitHub action success displayed in a browser is an **observation**, not independent cryptographic verification by the browser. A compromised runner or unauthorized workflow modification can lie in a report. No automated rollback, protected branch mutation, issue creation, secrets/credential rotation or incident closure is implemented.
 
 **Future controls:** independently signed operator approvals, truly immutable external evidence retention, scoped rollback proposals, recovery simulations, and an audited trust boundary between human consent and any mutating deployment operation.
+
+## R12 addition: non-executable recovery drafts
+
+R12 lets an operator prepare a **local, unsigned** JSON recovery proposal after an R11 incident, pinned by strings to a 40-hex incident commit and manifest SHA-256 plus a distinct 40-hex candidate commit and manifest SHA-256. It collects rationale, user-risk assessment and a time-bounded review deadline; a domain-separated SHA-256 digest protects only relative self-consistency of that draft. A malicious party can edit all fields **and recompute the hash**; this does not establish origin, consent or secure candidate provenance.
+
+The web studio does not fetch or authenticate R11 incident artifacts automatically. Imported JSON is checked locally with size limits. Every proposal carries fixed `approval: NOT_GRANTED_REQUIRES_INDEPENDENT_OWNER_AUTHORIZATION` and `execution: DISABLED_NO_TOOL_ACCESS` labels, enforced by browser and Node tests. The GitHub workflow has no code path that takes R12 drafts and deploys anything.
+
+A future trusted release/recovery gateway must independently verify the repo owner, specific source+candidate GitHub refs, build attestation, operator consent and expiry, reviewer separation, revocation, atomic single-use execution, and signed custody of the approval before it may carry out any deployment. No such authority has been granted at R12.
