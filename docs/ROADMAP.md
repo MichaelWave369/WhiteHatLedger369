@@ -70,14 +70,21 @@
 - Explicitly distinguish locked dependency graph from independently attested installed tree, security scan, SBOM, or deployed artifact.
 - Guardian production release controls remain UNKNOWN until independent provenance is established.
 
-## R8: Artifact Witness (PR #18, unsigned build-file checksums)
+## R8: Artifact Witness (merged in PR #18, unsigned build-file checksums)
 - Hash all produced static files with SHA-256 and derive a canonical sorted build-root fingerprint.
 - CI and Pages regenerate and independently re-read the entire built directory; mutation/added/missing-file/symlink tests enforce failures.
 - Visitors can re-fetch same-origin files to compare against the host-provided unsigned manifest.
 - Source manifest/lockfile fingerprints are recorded as untrusted CI claims; unsigned evidence is not an independently anchored attestation.
 - R6 Guardian deployment-attestation policy remains UNKNOWN. No enforcement.
 
-## R8.1 / R9: real enforceable assurance (future, separate review)
+## R9: The Independent Witness (PR #19, native attested manifest)
+- GitHub Actions `actions/attest@v4` emits GitHub/Sigstore SLSA provenance for R8's exact built `dist/artifact-manifest.json` after the byte-integrity check.
+- Main-only Pages build job holds scoped attestation/OIDC permissions; ordinary PR CI stays read-only.
+- GitHub CLI independently verifies subject, exact signer workflow and `refs/heads/main` before uploading Pages; failure stops that **build's publication**.
+- Website publishes a verification guide and delivered-manifest SHA-256, explicitly NOT claiming browser-based attestation verification.
+- Authenticity of the manifest does not independently verify deployed asset bytes, source safety, ownership consent, or the Pages host. R6 production Guardian remains advisory.
+
+## R9.1 / R10: real enforceable assurance (future, separate review)
 - Independently managed issuer keys, revocation, owner-scoped consent receipts, actual patch/retest provenance and verifiable artifact custody.
 - Verified lockfile/SBOM with immutable deployment digests and signer roots distributed outside the audited website.
 - A carefully staged real release gate with human-approved override receipts; *not* automatic until evidence and policy are independently audited.

@@ -13,6 +13,10 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+      attestations: write
     timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
@@ -34,6 +38,7 @@ jobs:
           npm run test:guardian
           npm run test:provenance
           npm run test:artifact
+          npm run test:attestation
       - name: Generate unsigned, source-linked lockfile inventory
         run: npm run provenance:report
       - name: Generate scoped OSV report (failure = UNKNOWN, not green)
@@ -46,6 +51,33 @@ jobs:
         run: |
           npm run artifact:stamp
           npm run artifact:verify
+      # R9: Only this main/scheduled/dispatch Pages build may request
+      # a short-lived GitHub OIDC certificate for the completed manifest.
+      # The signed subject is the R8 byte inventory, not an assertion
+      # that all deployed assets are free of vulnerabilities.
+      - name: Publish GitHub Sigstore provenance for build manifest
+        uses: actions/attest@v4
+        with:
+          subject-path: dist/artifact-manifest.json
+      - name: Verify issued attestation against workflow identity
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -eu
+          for attempt in 1 2 3; do
+            if gh attestation verify dist/artifact-manifest.json \
+              --repo "$GITHUB_REPOSITORY" \
+              --signer-workflow "$GITHUB_REPOSITORY/.github/workflows/pages.yml" \
+              --source-ref refs/heads/main; then
+              echo "R9 attestation verified by GitHub CLI."
+              exit 0
+            fi
+            if [ "$attempt" -lt 3 ]; then
+              sleep 5
+            fi
+          done
+          echo "R9 attestation verification FAILED. Refusing Pages upload." >&2
+          exit 1
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist

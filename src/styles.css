@@ -697,3 +697,43 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 .artifact-footer p { color: #aebb9c; margin: 9px 0 0; }
 @media(max-width:850px) { .artifact-head { grid-template-columns: 1fr; }.artifact-controls { flex-direction: column; align-items: stretch; }.artifact-summary { grid-template-columns: repeat(2,minmax(0,1fr)); }.artifact-summary > div:nth-child(2) { border-right: 0; }.artifact-summary > div:nth-child(-n+2) { border-bottom: 1px solid #375542; } }
 @media(max-width:550px) { .artifact-head { padding: 24px 17px; }.artifact-controls,.artifact-note,.artifact-footer { padding: 19px 16px; }.artifact-file { grid-template-columns: 1fr; gap: 6px; }.artifact-file small { text-align: left; }.artifact-summary > div { padding: 16px; } }
+
+/* R9 attestation verifier guide: NEVER claims browser-side Sigstore verification. */
+.attestation-section { margin-top: 60px; }
+.attestation-badge { white-space: nowrap; padding: 10px 12px; border: 1px solid #749877; background: #1d3027; font: 10px var(--mono); color: #ccedc2; }
+.attestation-shell { border: 1px solid #4f7758; background: #0d2020; box-shadow: inset 0 2px 0 #8eae70; }
+.attestation-hero { padding: 35px; display: grid; grid-template-columns: 1.35fr .8fr; gap: 30px; background: linear-gradient(145deg,#1b3029,#0e2023); }
+.attestation-hero h3 { color: #eaf3e7; font-size: clamp(30px,3.4vw,45px); line-height: 1.18; letter-spacing: -1.5px; margin: 14px 0; }
+.attestation-hero h3 span { color: #cbe4aa; }
+.attestation-hero p { color: #aac3b1; font-size: 13px; line-height: 1.78; }
+.attestation-hero code { color: #cfefc7; }
+.attestation-hero p.attestation-limit { color: #e0c9a5; font-size: 11px; }
+.attestation-status { border: 1px solid #655f44; padding: 24px; background: #242a20; display: flex; flex-direction: column; gap: 14px; }
+.attestation-status > span { color: #ccb996; font: 10px var(--mono); }
+.attestation-status > strong { color: #e9d49b; font: 600 clamp(19px,2.5vw,28px) var(--mono); overflow-wrap: anywhere; }
+.attestation-status > small { color: #c1b6a3; font-size: 11px; line-height: 1.75; }
+.attestation-status > div { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px; border-top: 1px solid #696347; padding-top: 11px; }
+.attestation-status > div span { color: #aea68e; font: 10px var(--mono); }
+.attestation-status > div b { color: #e2dcb7; font: 10px var(--mono); }
+.attestation-digest { display: flex; flex-direction: column; gap: 11px; border-block: 1px solid #455747; padding: 23px 30px; background: #122720; }
+.attestation-digest > span { color: #a6c5a4; font: 10px var(--mono); }
+.attestation-digest code { font: 12px/1.7 var(--mono); overflow-wrap: anywhere; color: #d0f1c7; }
+.attestation-digest small { color: #94aa9a; line-height: 1.6; }
+.attestation-digest p { font: 11px var(--mono); color: #efbca1; }
+.attestation-verify { display: grid; grid-template-columns: .7fr 1.3fr; gap: 30px; padding: 30px; }
+.attestation-verify h4 { color: #e9f3e7; font-size: 26px; margin: 12px 0; line-height: 1.25; }
+.attestation-verify p { color: #adbdad; font-size: 12px; line-height: 1.75; }
+.attestation-verify code { color: #c2eac5; }
+.attestation-commands { background: #152a23; border: 1px solid #456649; padding: 22px; }
+.attestation-commands p { margin: 7px 0 12px; }
+.attestation-commands p:not(:first-child) { margin-top: 22px; }
+.attestation-commands > a { color: #daf0ca; text-decoration: underline; font: 11px var(--mono); }
+.attestation-commands pre { overflow-x: auto; white-space: pre-wrap; overflow-wrap: anywhere; padding: 15px; background: #101c20; border: 1px solid #3e574b; color: #d8ecd5; font: 11px/1.7 var(--mono); }
+.attestation-commands button { background: #284938; border: 1px solid #65946a; color: #d4efd6; padding: 13px 17px; font: 11px var(--mono); margin: 7px 0; }
+.attestation-commands > span { display: block; color: #95b6a2; font: 10px var(--mono); min-height: 17px; }
+.attestation-footer { border-top: 1px solid #666448; background: #282b20; padding: 20px 30px; color: #cabb9c; font-size: 11px; line-height: 1.8; }
+.attestation-footer strong { color: #f1dda7; }
+.attestation-footer p { margin: 10px 0 0; }
+.attestation-footer a { color: #d0ebbb; text-decoration: underline; font: 11px var(--mono); }
+@media(max-width:850px) { .attestation-hero,.attestation-verify { grid-template-columns: 1fr; } }
+@media(max-width:550px) { .attestation-hero { padding: 24px 18px; }.attestation-digest,.attestation-verify,.attestation-footer { padding: 20px 17px; } .attestation-commands { padding: 16px; } }

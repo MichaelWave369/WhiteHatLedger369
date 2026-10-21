@@ -160,12 +160,38 @@ R8 adds `scripts/artifact-core.mjs`, an **unsigned, deterministic static-build f
 npm run build
 npm run artifact:stamp
 npm run artifact:verify
+npm run test:attestation
 npm run test:artifact
 ```
 
 The R8 **Artifact Witness** panel loads the published manifest and lets visitors re-download **only same-origin static files** and rehash them in the browser to check their bytes against the self-published manifest. This is a meaningful drift detector, **not independent source authenticity or a signed attestation**. A malicious publisher can change both the manifest and files. The generated manifest is excluded from its own hash inventory to avoid a circular digest; a future third-party signature or external trust anchor is needed to protect it.
 
 R6 Guardian's independently verified deployment attestation remains **UNKNOWN**. No production release is blocked or certified. See [R8 Artifact Witness](docs/ARTIFACT.md).
+
+## R9: Attested Build Manifest (GitHub/Sigstore provenance)
+
+R9 adds a **real, native GitHub artifact-attestation issuance step** for the completed R8 build manifest `dist/artifact-manifest.json` using `actions/attest@v4`. GitHub's Actions OIDC identity is used to request a short-lived Sigstore signing certificate. The signed provenance is published to GitHub's attestation service, rather than to or solely by the Pages site.
+
+The Pages build job requests `id-token: write` and `attestations: write` **only in the deployment workflow**. Pull-request CI retains `contents: read`. Before uploading Pages, the workflow must verify the newly signed subject using GitHub CLI and enforce both the exact signing workflow `MichaelWave369/WhiteHatLedger369/.github/workflows/pages.yml` and `refs/heads/main` source ref. A failed or missing attestation now fails that Pages build; it cannot silently publish a new build as successful.
+
+**Independent verification, once the post-merge Pages run issues an attestation:**
+
+```sh
+# Download CURRENT published bytes of the attested manifest.
+curl -fL -o artifact-manifest.json https://michaelwave369.github.io/WhiteHatLedger369/artifact-manifest.json
+
+# Install and authenticate GitHub CLI if needed, then independently verify:
+gh attestation verify artifact-manifest.json \
+  -R MichaelWave369/WhiteHatLedger369 \
+  --signer-workflow MichaelWave369/WhiteHatLedger369/.github/workflows/pages.yml \
+  --source-ref refs/heads/main
+```
+
+The page has an R9 "Independent Witness" panel that shows the SHA-256 of the **delivered** manifest and gives these verification instructions. The browser intentionally shows **NOT VERIFIED HERE** instead of a fake green attestation badge.
+
+**Limitations:** A PR green CI check cannot demonstrate attestation issuance. Only a successful **main** Pages run can do that. The attestation binds GitHub's workflow identity to the manifest **bytes**; verifying the separately served static files against the manifest still requires R8. Neither action proves freedom from vulnerabilities, real ownership consent, uncompromised build tools, nor a secure production deploy. R6 Guardian stays advisory and its unresolved evidence remains UNKNOWN.
+
+See [R9 independent build provenance](docs/ATTESTATION.md).
 
 ## Run locally
 
