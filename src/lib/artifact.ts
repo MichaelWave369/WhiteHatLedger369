@@ -72,7 +72,7 @@ export function isArtifactManifest(value:unknown):value is ArtifactManifest {
  for(const record of value.files){
    if(!isObj(record)||!isSafeWitnessPath(record.path)||
       typeof record.sha256!=='string'||!HASH.test(record.sha256)||
-      !Number.isSafeInteger(record.bytes)||record.bytes<0||record.bytes>MAX_FILE||
+      typeof record.bytes!=='number'||!Number.isSafeInteger(record.bytes)||record.bytes<0||record.bytes>MAX_FILE||
       record.path<=prior)return false
    total+=record.bytes
    prior=record.path
