@@ -3,6 +3,8 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
+  schedule:
+    - cron: '17 13 * * *' # daily 13:17 UTC; subject is this repo only
 permissions:
   contents: read
 concurrency:
@@ -23,6 +25,9 @@ jobs:
         run: |
           npm run check
           npm run test
+          npm run test:sentinel
+      - name: Generate scoped OSV report (failure = UNKNOWN, not green)
+        run: npm run sentinel:scan
       - name: Build static application
         run: npm run build
       - uses: actions/upload-pages-artifact@v3

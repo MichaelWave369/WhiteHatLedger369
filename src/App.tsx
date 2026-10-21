@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState, type FormEvent } from 'react'
 import { formatDate, inventoryMetrics, reviewCues, type Repository } from './lib/audit'
 import { DEFAULT_OWNER, fetchPublicInventory, isValidOwner, type InventorySnapshot } from './lib/github'
+import SentinelPanel from './SentinelPanel'
 
 type Filter = 'all' | 'review' | 'active' | 'archived'
 type FetchState = 'loading' | 'ready' | 'error'
@@ -148,7 +149,7 @@ export default function App() {
           <div className="brand-mark"><Mark /></div>
           <div><div className="brand-name">WHITEHAT<span>LEDGER</span><b>369</b></div><div className="brand-caption">ETHICAL REVERSE LAB</div></div>
         </a>
-        <div className="header-right"><span className="header-dot" /> READ-ONLY / PUBLIC DATA <span className="header-version">R0 · WATCHTOWER</span></div>
+        <div className="header-right"><span className="header-dot" /> READ-ONLY / PUBLIC DATA <span className="header-version">R1 · WATCHTOWER / SENTINEL</span></div>
       </header>
 
       <main className="shell">
@@ -169,7 +170,7 @@ export default function App() {
 
         <section className="scope-banner" aria-label="Assessment scope">
           <div className="scope-icon" aria-hidden="true">i</div>
-          <div><strong>INVENTORY IS NOT A SECURITY AUDIT.</strong><p>R0 reads publicly accessible GitHub metadata only. No vulnerability scanning, dependency inspection, permission verification, secret scanning, private repositories, or active testing is performed. Every active repository remains <b>UNASSESSED</b>.</p></div>
+          <div><strong>KNOW EXACTLY WHAT WAS TESTED.</strong><p>The inventory shows public GitHub metadata. R1 separately checks <b>only WhiteHatLedger369's own exactly pinned direct npm dependencies</b> against OSV.dev. Other repositories, transitive dependencies, deployment configurations, PHP runtimes, credentials, and permissions remain <b>UNASSESSED</b>.</p></div>
         </section>
 
         <section className="control-panel" aria-label="Repository controls">
@@ -194,8 +195,10 @@ export default function App() {
           </div>
         </section>
 
+        <SentinelPanel />
+
         <section className="repository-section" aria-labelledby="repository-title">
-          <div className="panel-heading"><div><span className="section-index">03 / CATALOG</span><h2 id="repository-title">Asset registry</h2></div><span className="meta-label">{state === 'ready' ? `${filtered.length} MATCHES` : 'AWAITING VERIFIED SNAPSHOT'}</span></div>
+          <div className="panel-heading"><div><span className="section-index">04 / CATALOG</span><h2 id="repository-title">Asset registry</h2></div><span className="meta-label">{state === 'ready' ? `${filtered.length} MATCHES` : 'AWAITING VERIFIED SNAPSHOT'}</span></div>
           <div className="catalog-tools">
             <div className="search-wrap"><span aria-hidden="true">⌕</span><input aria-label="Search repositories" placeholder="Search names, descriptions, languages…" value={search} onChange={(event) => { setSearch(event.target.value); setPage(1) }} disabled={state !== 'ready'} /></div>
             <select aria-label="Filter language" value={language} onChange={(event) => { setLanguage(event.target.value); setPage(1) }} disabled={state !== 'ready'}><option value="all">All languages</option>{languages.map((l) => <option key={l} value={l}>{l}</option>)}</select>
@@ -212,12 +215,12 @@ export default function App() {
         </section>
 
         <section className="next-stage">
-          <span className="section-index">04 / NEXT MISSION</span><h2>From visibility to verification.</h2>
-          <p>R1 will add authorized, server-side dependency and advisory analysis, scoped findings, and evidence receipts. No browser-hosted credentials, no surprise targets, no pretend green shields.</p>
+          <span className="section-index">05 / NEXT MISSION</span><h2>From visibility to verification.</h2>
+          <p>R1 begins with a tightly scoped, server-side, direct-dependency advisory observation for this project. Next: lockfile/transitive coverage and per-repository opt-in before any wider conclusions. No browser-hosted credentials, no surprise targets, and no pretend green shields.</p>
           <div className="stage-steps"><span><b>R0</b> INVENTORY</span><span><b>R1</b> ADVISORIES</span><span><b>R2</b> GAUNTLET</span><span><b>R3</b> MINOTAUR</span><span><b>R4</b> AGENT GATES</span></div>
         </section>
       </main>
-      <footer className="site-footer shell"><div><Mark size={22} /> WHITEHATLEDGER369 <span>·</span> LEDGER ABOVE EGO.</div><p>R0 = METADATA ONLY. NOT CERTIFIED SECURE. <a href="https://github.com/MichaelWave369/WhiteHatLedger369" target="_blank" rel="noopener noreferrer">SOURCE ↗</a></p></footer>
+      <footer className="site-footer shell"><div><Mark size={22} /> WHITEHATLEDGER369 <span>·</span> LEDGER ABOVE EGO.</div><p>R0 PUBLIC INVENTORY · R1 DIRECT NPM ADVISORIES ONLY. NOT CERTIFIED SECURE. <a href="https://github.com/MichaelWave369/WhiteHatLedger369" target="_blank" rel="noopener noreferrer">SOURCE ↗</a></p></footer>
     </div>
   )
 }
