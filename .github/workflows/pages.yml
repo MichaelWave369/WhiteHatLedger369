@@ -42,6 +42,7 @@ jobs:
           npm run test:artifact
           npm run test:attestation
           npm run test:custody
+          npm run test:incident
       - name: Generate unsigned, source-linked lockfile inventory
         run: npm run provenance:report
       - name: Generate scoped OSV report (failure = UNKNOWN, not green)
@@ -121,11 +122,18 @@ jobs:
           EXPECTED_MANIFEST_SHA256: ${{ needs.build.outputs.manifest_sha256 }}
           GH_TOKEN: ${{ github.token }}
         run: node scripts/custody-verify.mjs
-      - name: Retain unsigned post-deploy verification observation
+      - name: Produce advisory R11 incident packet and recovery steps
+        if: always()
+        env:
+          EXPECTED_MANIFEST_SHA256: ${{ needs.build.outputs.manifest_sha256 }}
+        run: node scripts/incident.mjs
+      - name: Retain unsigned custody and incident evidence
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: postdeploy-custody-observation
-          path: custody-report.json
+          path: |
+            custody-report.json
+            incident-report.json
           if-no-files-found: ignore
           retention-days: 30
