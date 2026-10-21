@@ -771,3 +771,47 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 .custody-footer a { color: #c7eece; text-decoration: underline; font: 10px var(--mono); }
 @media(max-width:850px){ .custody-hero{grid-template-columns:1fr;} .custody-stages{grid-template-columns:repeat(2,minmax(0,1fr));} .custody-stages>div:nth-child(2){border-right:0;} .custody-stages>div:nth-child(-n+2){border-bottom:1px solid #3b5842;} }
 @media(max-width:550px){ .custody-hero{padding:24px 18px;} .custody-stages>div{padding:16px;} .custody-note,.custody-footer{padding:18px;} }
+
+/* R11 Incident Desk: retained read-only observations, operator-only recovery. */
+.incident-section { margin-top: 60px; }
+.incident-badge { border: 1px solid #8a7b4d; background: #322c1d; color: #f0dba8; font: 10px var(--mono); padding: 10px 12px; white-space: nowrap; }
+.incident-shell { background: #12211f; border: 1px solid #647153; box-shadow: inset 0 2px 0 #a6ac70; }
+.incident-header { display: grid; grid-template-columns: 1.3fr .8fr; gap: 26px; padding: 35px; background: linear-gradient(133deg,#182e26,#121d22); }
+.incident-header h3 { color: #e8f6e7; font-size: clamp(30px,3.5vw,44px); letter-spacing: -1.4px; line-height: 1.15; margin: 14px 0; }
+.incident-header h3 span { color: #e2d5a1; }
+.incident-header p { color: #a8bdaa; font-size: 13px; line-height: 1.8; }
+.incident-header .incident-subtext { color: #b8ba9f; font-size: 11px; }
+.incident-status { display: flex; flex-direction: column; gap: 14px; background: #24291f; border: 1px solid #6f704c; padding: 25px; }
+.incident-status > span { color: #d2caa2; font: 10px var(--mono); }
+.incident-status > strong { font: 600 clamp(21px,2.6vw,30px) var(--mono); overflow-wrap: anywhere; }
+.incident-green { color: #a9e9bf; }
+.incident-red { color: #f0b19d; }
+.incident-gold { color: #ead098; }
+.incident-status > div { padding-top: 12px; border-top: 1px solid #585e48; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
+.incident-status > div span { color: #a0ab91; font: 10px var(--mono); }
+.incident-status > div b { color: #dce3c0; font: 11px var(--mono); }
+.incident-status small { color: #c2b997; font-size: 10px; line-height: 1.6; }
+.incident-warning { background: #352a1d; padding: 21px 28px; border-block: 1px solid #816548; color: #d9c3a2; font-size: 11px; line-height: 1.8; }
+.incident-warning strong { color: #f1d79c; }
+.incident-history { padding: 25px 29px; background: #10231f; }
+.incident-run { display: flex; justify-content: space-between; align-items: center; gap: 20px; padding: 18px; margin-top: 9px; border: 1px solid #3e5b45; background: #162b23; }
+.incident-run > div { flex: 1; min-width: 0; }
+.incident-run > div > span { display: block; color: #98bca5; font: 10px var(--mono); margin-bottom: 9px; }
+.incident-run strong { font: 700 13px var(--mono); }
+.incident-run p { color: #a5c0a9; font-size: 11px; line-height: 1.65; margin: 10px 0 0; }
+.incident-run a { white-space: nowrap; color: #cee6be; text-decoration: underline; font: 10px var(--mono); }
+.incident-empty { color: #d5cba7; font-size: 11px; }
+.incident-recovery { display: grid; grid-template-columns: .68fr 1.3fr; gap: 25px; padding: 30px; border-top: 1px solid #475c44; }
+.incident-recovery h4 { color: #e4f4e3; font-size: 27px; margin: 12px 0; line-height: 1.3; }
+.incident-recovery > div:first-child p { color: #a7b9a4; font-size: 12px; line-height: 1.75; }
+.incident-steps { display: grid; gap: 9px; }
+.incident-steps article { display: flex; gap: 16px; padding: 16px; border: 1px solid #3b6049; background: #172b24; }
+.incident-steps article > span { color: #c2deac; font: 11px var(--mono); }
+.incident-steps strong { color: #d9e8cf; font-size: 12px; }
+.incident-steps p { color: #a1b8a9; font-size: 11px; line-height: 1.65; margin: 7px 0 0; }
+.incident-footer { background: #292a1e; border-top: 1px solid #72714a; padding: 22px 29px; display: flex; justify-content: space-between; flex-wrap: wrap; align-items: center; gap: 20px; }
+.incident-footer strong { color: #e8d5a3; font: 10px var(--mono); }
+.incident-footer p { color: #c0bba1; font-size: 11px; line-height: 1.7; margin: 7px 0 0; }
+.incident-footer a { color: #d8ecbc; font: 10px var(--mono); text-decoration: underline; white-space: nowrap; }
+@media(max-width:860px){ .incident-header,.incident-recovery{grid-template-columns:1fr;} }
+@media(max-width:550px){ .incident-header,.incident-recovery{padding:24px 17px;} .incident-history,.incident-warning,.incident-footer{padding:20px 16px;} .incident-run{flex-direction:column;align-items:flex-start;} }

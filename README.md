@@ -162,6 +162,7 @@ npm run artifact:stamp
 npm run artifact:verify
 npm run test:attestation
 npm run test:custody
+npm run test:incident
 npm run test:artifact
 ```
 
@@ -215,6 +216,27 @@ npm run test:custody
 ```
 
 See [R10 Public Chain of Custody](docs/CUSTODY.md).
+
+## R11: Incident Desk (advisory post-deployment response)
+
+R11 adds **deterministic, read-only incident and recovery packets** to the R10 post-deploy custody job. The workflow now runs the R11 incident classifier **even if the R10 custody check fails**. It retains `custody-report.json` and `incident-report.json` side-by-side as unsigned GitHub Actions artifacts (30-day retention) and adds a structured operator checklist to the Actions job summary.
+
+The classifier recognizes:
+- `NO_CUSTODY_INCIDENT_OBSERVED`: an internally consistent R10 observation reports matching hosted bytes and a GitHub-verified attestation. **Not** a security certification.
+- `REVIEW_REQUIRED`: verification explicitly failed, an observation was inconsistent, or it named the wrong source commit/manifest digest.
+- `UNASSESSED`: no usable observation exists. Missing evidence **never** becomes a silent PASS.
+
+Each packet includes a deterministic ID based on the run, source commit, expected manifest digest and incident class, a named provenance limitation and five operator-only steps: **preserve, independently verify, diagnose, authorize, retest**.
+
+The **Incident Desk** dashboard reads the latest four public GitHub Actions runs and their post-deployment job results. It displays workflow status only and clearly distinguishes that from a cryptographically independently audited incident register.
+
+**There is NO automatic rollback, re-deploy, issue creation, credential rotation, remediation or operator-closure action.** The site may already be live when a custody error occurs. A subsequent green run cannot delete the earlier failed run or certify incident closure.
+
+```sh
+npm run test:incident
+```
+
+See [R11 Incident Response](docs/INCIDENT.md).
 
 ## Run locally
 

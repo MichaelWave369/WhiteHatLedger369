@@ -84,14 +84,21 @@
 - Website publishes a verification guide and delivered-manifest SHA-256, explicitly NOT claiming browser-based attestation verification.
 - Authenticity of the manifest does not independently verify deployed asset bytes, source safety, ownership consent, or the Pages host. R6 production Guardian remains advisory.
 
-## R10: Public Chain of Custody (PR #20, post-deploy verifier)
+## R10: Public Chain of Custody (merged in PR #20, post-deploy verifier)
 - Post-deploy GitHub Actions job downloads **actual hosted** manifest, checks its SHA-256 against the exact build job output, verifies GitHub/Sigstore identity and source commit through `gh attestation verify`.
 - Fetches every public hosted file listed by the attested manifest and validates exact SHA-256/byte counts.
 - Negative-control tests cover same-length changes, missing assets, mismatched expected build or signing identity.
 - Public GitHub Actions result metadata appears in read-only UI, not as browser-verified cryptographic trust.
 - Post-deploy failure flags the run; **it cannot roll back an already published website**. No owner approval or vulnerability certification inferred.
 
-## R10.1 / R11: real enforceable assurance (future, separate review)
+## R11: Incident Desk (PR #21, advisory incident/recovery packets)
+- On every completed R10 custody job, including failures, generate an unsigned run-bound incident packet with a deterministic ID and strict result classes.
+- Missing/inconsistent evidence is UNASSESSED or REVIEW_REQUIRED; later green runs cannot erase or silently resolve previous failures.
+- Retain custody plus incident JSON together with 30-day GitHub Actions artifact retention; no GitHub write credentials or automatic actions.
+- Public Incident Desk shows latest Actions custody results and an operator-only recovery playbook, not unverified security conclusions.
+- Real restoration, rollbacks, issue filing and closure require separately approved and verifiable human actions.
+
+## R11.1 / R12: trusted recovery (future, separate review)
 - Independently managed issuer keys, revocation, owner-scoped consent receipts, actual patch/retest provenance and verifiable artifact custody.
 - Verified lockfile/SBOM with immutable deployment digests and signer roots distributed outside the audited website.
 - A carefully staged real release gate with human-approved override receipts; *not* automatic until evidence and policy are independently audited.
