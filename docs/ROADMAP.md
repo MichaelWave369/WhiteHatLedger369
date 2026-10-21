@@ -18,7 +18,7 @@
 - Repository-by-repository opt-in scopes and least-privilege backend/GitHub App access for any private data.
 - Signed, portable finding/triage and fix/retest receipts. Unsigned R1 telemetry is not authoritative.
 
-## R2: WhiteHat Gauntlet (PR #12, self-contained local simulator)
+## R2: WhiteHat Gauntlet (merged in PR #12, self-contained local simulator)
 - Browser-local `lab://` fixtures with positive controls and adversarial cases.
 - Seven deterministic authorization/integrity tests, replay fault injection, and downloadable unsigned evidence JSON.
 - No external target contact, delegated credentials, dynamic code execution, or real-world scanning.
@@ -28,10 +28,15 @@
 - Truly isolated deliberately vulnerable training apps and patch/retest evidence.
 - No uncontrolled internet targets.
 
-## R3: Minotaur Protocol (experimental)
-- Progressive authorization restriction from normal to isolate/quarantine.
-- Container/VM containment and syscall/network policy enforcement.
-- Decoy environments for training only, never confused with security boundaries.
+## R3: Minotaur Protocol (PR #13, experimental)
+- Browser-local, monotonic fixture capability reduction across seven named tiers.
+- Inert policy checks, escalation trace, replayable event sequence, and unsigned observations.
+- Separate, explicitly opt-in **local Docker smoke test** using only one bundled harmless fixture: no network, read-only mounts, no capabilities, unprivileged UID, no-new-privileges, and resource limits.
+- No production integration, no untrusted payload execution, no genuine isolation in the browser. Container smoke is not proof of safety under hostile code.
+
+## R3.1: genuine isolation design review (future)
+- Dedicated VM/microVM policy, immutable/pinned images, seccomp profiles, secret isolation, measured network-denial verification, signed approvals, and independent adversarial assessment.
+- Separate human authorization required before any real-target or unknown-code execution.
 
 ## R4: Agent authority
 - Signed, expiring action grants and operator review.
