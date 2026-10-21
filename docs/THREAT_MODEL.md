@@ -49,3 +49,12 @@ R1 adds a server-side GitHub Actions job that reads **only this checked-out proj
 **Explicit non-goals:** transitive/lockfile dependencies, deployment runtime versions, package integrity, CVSS calculation, severity classification, scan of any other repository, and active exploitation. A clean OSV response is an advisory observation, not an independent security verification.
 
 Failure modes: OSV failure, timeouts, malformed JSON, incomplete pagination, unpinned dependency, and stale report become **UNKNOWN** in the UI. Staleness cutoff is 48 hours. Scheduled jobs may be delayed by GitHub. Published source hashes are *not digital signatures*; a future proof/custody system must validate them independently. The data published in `public/sentinel-report.json` is overwritten at build time; the checked-in placeholder is never evidence of a completed scan.
+
+
+## R2 addition: in-browser synthetic Gauntlet
+
+R2 does not cross a production execution boundary. It evaluates **hardcoded training grants, operations, nonces, timestamps, and payloads** against a local in-memory `FixtureGate`. Synthetic targets use a non-routable `lab://whitehat369/` namespace. There are no target URLs fetched, arbitrary scripts evaluated, shell commands run, model invocations, or credentials handled by R2. The only generated artifact is a user-triggered downloadable JSON observation, produced locally by the browser's Blob API.
+
+A positive control and adverse probe are evaluated for each scenario. A deliberate `replay-disabled` fault-injection mode must cause at least one scenario to fail. The artifact digest is SHA-256 used for **integrity comparison only**; it is not a digital signature or independent trust anchor. Lower-trust instruction text is inert fixture data and is never sent to a model. Grant checking is illustrative and must not be transplanted into a real agent or auth service without a full threat model, robust identity bindings, authorization, storage, process isolation, and independent security review.
+
+All 7/7 passes establish is that bundled fixture tests produced their expected observations. They say nothing about real-world resilience. Exports are unsigned, unauthenticated, and have no authority outside the local exercise.

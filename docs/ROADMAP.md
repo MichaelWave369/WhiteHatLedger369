@@ -8,7 +8,7 @@
 - Tests, CI, restrictive workflow permissions, Dependabot.
 - Threat model and disclosure policy.
 
-## R1: Sentinel (PR #2, deliberately narrow)
+## R1: Sentinel (merged in PR #11, deliberately narrow)
 - Read-only, server-side OSV.dev advisory observations for **direct exact-version npm dependencies of this repo alone**.
 - Manifest hash, commit, timestamps, validated advisory IDs, pagination completeness, and UNKNOWN states.
 - Published JSON report and dashboard panel; daily GitHub Pages rebuild and offline tests.
@@ -18,10 +18,15 @@
 - Repository-by-repository opt-in scopes and least-privilege backend/GitHub App access for any private data.
 - Signed, portable finding/triage and fix/retest receipts. Unsigned R1 telemetry is not authoritative.
 
-## R2: WhiteHat Gauntlet
-- Local deliberately vulnerable targets and non-destructive scenarios.
-- Written scope/consent checks before every run.
-- Patch and retest receipts; no uncontrolled internet targets.
+## R2: WhiteHat Gauntlet (PR #12, self-contained local simulator)
+- Browser-local `lab://` fixtures with positive controls and adversarial cases.
+- Seven deterministic authorization/integrity tests, replay fault injection, and downloadable unsigned evidence JSON.
+- No external target contact, delegated credentials, dynamic code execution, or real-world scanning.
+
+## R2.1: authorized test harness (separate future scope)
+- Written scope/consent checks before each **future** real target evaluation.
+- Truly isolated deliberately vulnerable training apps and patch/retest evidence.
+- No uncontrolled internet targets.
 
 ## R3: Minotaur Protocol (experimental)
 - Progressive authorization restriction from normal to isolate/quarantine.
