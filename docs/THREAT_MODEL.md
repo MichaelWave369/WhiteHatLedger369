@@ -8,7 +8,7 @@
 2. GitHub's public REST API is an external data source, not an assurance authority.
 3. Repo names, descriptions, languages, and links are untrusted text and must be rendered by React as text, never injected as HTML.
 4. The public web app does **not** hold tokens, private credentials, or repo-admin permissions.
-5. No network contact occurs beyond GitHub public API requests and loading optional font resources from Google Fonts. Font loading does not affect inventory correctness.
+5. No application-initiated network contact occurs beyond GitHub's public API. The UI uses system fonts and loads no third-party scripts or fonts.
 
 ## Risks and controls
 
