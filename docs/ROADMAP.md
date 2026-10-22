@@ -91,14 +91,21 @@
 - Public GitHub Actions result metadata appears in read-only UI, not as browser-verified cryptographic trust.
 - Post-deploy failure flags the run; **it cannot roll back an already published website**. No owner approval or vulnerability certification inferred.
 
-## R11: Incident Desk (PR #21, advisory incident/recovery packets)
+## R11: Incident Desk (merged in PR #21, advisory incident/recovery packets)
 - On every completed R10 custody job, including failures, generate an unsigned run-bound incident packet with a deterministic ID and strict result classes.
 - Missing/inconsistent evidence is UNASSESSED or REVIEW_REQUIRED; later green runs cannot erase or silently resolve previous failures.
 - Retain custody plus incident JSON together with 30-day GitHub Actions artifact retention; no GitHub write credentials or automatic actions.
 - Public Incident Desk shows latest Actions custody results and an operator-only recovery playbook, not unverified security conclusions.
 - Real restoration, rollbacks, issue filing and closure require separately approved and verifiable human actions.
 
-## R11.1 / R12: trusted recovery (future, separate review)
+## R12: Recovery Proposal Forge (PR #22, explicit non-authority)
+- Browser-local immutable-reference recovery proposal drafts, export and local JSON re-verification.
+- Bind each proposal to an exact R11 incident ID/run/source digest and a distinct candidate commit and build-manifest digest.
+- Domain-separated SHA-256 fingerprints guard **self-consistency**, not origin authenticity. All input references remain unverified until independently assessed.
+- Fixed decision: owner approval NOT GRANTED and execution DISABLED; bounded review deadlines are not permission leases.
+- Offline negative tests for tampering, forged approvals, stale deadlines, wrong hashes, same-commit candidates, and attempts at auto execution.
+
+## R12.1 / R13: separately trusted recovery authority (future, separate review)
 - Independently managed issuer keys, revocation, owner-scoped consent receipts, actual patch/retest provenance and verifiable artifact custody.
 - Verified lockfile/SBOM with immutable deployment digests and signer roots distributed outside the audited website.
 - A carefully staged real release gate with human-approved override receipts; *not* automatic until evidence and policy are independently audited.

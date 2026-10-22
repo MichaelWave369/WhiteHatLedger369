@@ -25,7 +25,9 @@
     "test:artifact": "node --test scripts/artifact.offline.mjs",
     "test:attestation": "node --test scripts/attestation.offline.mjs",
     "test:custody": "node --test scripts/custody.offline.mjs",
-    "test:incident": "node --test scripts/incident.offline.mjs"
+    "test:incident": "node --test scripts/incident.offline.mjs",
+    "test:recovery": "node --test scripts/recovery.offline.mjs",
+    "recovery:verify": "node scripts/recovery-verify.mjs"
   },
   "dependencies": {
     "react": "19.1.1",

@@ -30,6 +30,8 @@ R10 adds a **read-only post-deployment custody check** comparing the GitHub/Sigs
 
 R11 retains unsigned incident/recovery packets derived from R10 custody observations and publishes a read-only review protocol. It does not automatically remediate a failure, claim attacker activity, file issues, or authorize production rollback. Closure requires separate human review and evidence.
 
+R12 adds **unsigned recovery-review drafts only**, bound to specific source/candidate commit hashes and manifest digests. No draft can approve itself, sign an owner decision, or trigger deployment. A SHA-256 commitment to operator input is not independent release provenance.
+
 Future **real-target** testing modules must verify written target scope, ownership/consent, time limits, tools, evidence limits, and stop conditions before taking an action.
 
 ## Supported version

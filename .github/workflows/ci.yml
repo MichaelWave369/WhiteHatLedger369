@@ -43,6 +43,8 @@ jobs:
         run: npm run test:custody
       - name: R11 Incident Desk safety and classifier tests
         run: npm run test:incident
+      - name: R12 Recovery Proposal offline tests (no mutations)
+        run: npm run test:recovery
       - name: Build
         run: npm run build
       - name: Stamp and verify exact built files
