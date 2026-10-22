@@ -27,7 +27,10 @@
     "test:custody": "node --test scripts/custody.offline.mjs",
     "test:incident": "node --test scripts/incident.offline.mjs",
     "test:recovery": "node --test scripts/recovery.offline.mjs",
-    "recovery:verify": "node scripts/recovery-verify.mjs"
+    "recovery:verify": "node scripts/recovery-verify.mjs",
+    "test:plur": "node --test scripts/plur.offline.mjs",
+    "plur:check": "node scripts/plur.mjs check .",
+    "plur:report": "node scripts/plur.mjs report ."
   },
   "dependencies": {
     "react": "19.1.1",

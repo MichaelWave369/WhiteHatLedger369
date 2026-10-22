@@ -4,6 +4,12 @@
 
 > Break only what you are allowed to heal. Test only what you own or are explicitly authorized to examine. Every action earns a receipt.
 
+## R13: SuperWhiteHat PLUR Division
+
+R13 introduces a versioned Peace/Love/Unity/Respect static-source policy, deterministic unsigned source-hash receipts, offline negative-control tests and a read-only dashboard. CI and Pages builds run the checker, which exits nonzero for REVIEW, BLOCK or UNKNOWN. This narrow scanner does **not** establish harmless intent, prevent forks from removing checks, certify software safety or create a production release signer. Owner-controlled GitHub branch rulesets must mark its CI check as required for merge enforcement.
+
+Run `npm run test:plur`, `npm run plur:check`, and `npm run plur:report`. See [R13 PLUR specification](docs/PLUR.md) for bypasses and limitations.
+
 ## R0: The Watchtower
 
 A **read-only, public GitHub repository inventory** built with React, Vite, and TypeScript.

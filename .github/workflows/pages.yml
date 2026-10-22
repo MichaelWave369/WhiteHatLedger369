@@ -44,12 +44,16 @@ jobs:
           npm run test:custody
           npm run test:incident
           npm run test:recovery
+          npm run test:plur
+          npm run plur:check
       - name: Generate unsigned, source-linked lockfile inventory
         run: npm run provenance:report
       - name: Generate scoped OSV report (failure = UNKNOWN, not green)
         run: npm run sentinel:scan
       - name: Generate advisory Release Guardian posture (non-blocking)
         run: npm run guardian:report
+      - name: Publish unsigned R13 PLUR source observation
+        run: npm run plur:report
       - name: Build static application
         run: npm run build
       - name: Fingerprint completed static build and verify each file

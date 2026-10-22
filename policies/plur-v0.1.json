@@ -1,0 +1,49 @@
+{
+  "schema": "WHL369-PLUR-POLICY-V1",
+  "version": "0.1.0",
+  "name": "SuperWhiteHat PLUR Division",
+  "rules": [
+    {
+      "id": "PLUR-P-001",
+      "principle": "Peace",
+      "severity": "BLOCK",
+      "description": "Decoded payload passed immediately to eval"
+    },
+    {
+      "id": "PLUR-P-002",
+      "principle": "Peace",
+      "severity": "BLOCK",
+      "description": "Download piped directly into a shell"
+    },
+    {
+      "id": "PLUR-L-001",
+      "principle": "Love",
+      "severity": "REVIEW",
+      "description": "Potential hardcoded credential literal"
+    },
+    {
+      "id": "PLUR-L-002",
+      "principle": "Love",
+      "severity": "REVIEW",
+      "description": "Environment secrets file included in source tree"
+    },
+    {
+      "id": "PLUR-U-001",
+      "principle": "Unity",
+      "severity": "REVIEW",
+      "description": "PLUR enforcement bypass indicator"
+    },
+    {
+      "id": "PLUR-R-001",
+      "principle": "Respect",
+      "severity": "REVIEW",
+      "description": "Environment value interpolated in outbound fetch"
+    },
+    {
+      "id": "PLUR-R-002",
+      "principle": "Respect",
+      "severity": "REVIEW",
+      "description": "Broad filesystem permission assignment"
+    }
+  ]
+}
