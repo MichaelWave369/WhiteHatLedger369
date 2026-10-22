@@ -93,7 +93,7 @@ jobs:
           done
           echo "R9 attestation verification FAILED. Refusing Pages upload." >&2
           exit 1
-      - uses: actions/upload-pages-artifact@v3
+      - uses: actions/upload-pages-artifact@v5
         with:
           path: dist
   deploy:
