@@ -4,6 +4,23 @@
 
 > Break only what you are allowed to heal. Test only what you own or are explicitly authorized to examine. Every action earns a receipt.
 
+## R14: Identity Shield (ALIENS EYE report review)
+
+R14 adds a consent-gated **Identity exposure desk** to the live React Watchtower.
+It parses local ALIENS EYE JSON reports using the upstream `scan_summary` /
+`variations` / `sites` format, clearly labels third-party Found/Maybe/Unknown
+results as **unverified**, and generates an optional de-identified receipt.
+The report remains in the browser tab, with no upload, background scan, or
+persistent storage. A synthetic demonstration is included.
+
+**Not a live OSINT scanner:** ALIENS EYE is Python and must be separately run,
+if desired, on identities covered by express authorization. Static GitHub Pages
+cannot directly execute it or safely proxy hundreds of websites. There is no
+MCP, Tor, proxy or identity-correlation integration in R14.
+
+See [R14 Identity Shield specification](docs/IDENTITY.md) and
+`src/lib/identity.test.ts` for the trust model and negative controls.
+
 ## R13: SuperWhiteHat PLUR Division
 
 R13 introduces a versioned Peace/Love/Unity/Respect static-source policy, deterministic unsigned source-hash receipts, offline negative-control tests and a read-only dashboard. CI and Pages builds run the checker, which exits nonzero for REVIEW, BLOCK or UNKNOWN. This narrow scanner does **not** establish harmless intent, prevent forks from removing checks, certify software safety or create a production release signer. Owner-controlled GitHub branch rulesets must mark its CI check as required for merge enforcement.
