@@ -20,7 +20,7 @@ The R14 workflow:
    trusted local environment, following upstream documentation and site terms.
    Request its **JSON** output. Do not upload the report to GitHub.
 3. Open WhiteHatLedger369, select **Identity exposure desk**, provide the
-   local JSON file (or paste its contents), type its exact \`base_username\`,
+   local JSON file (or paste its contents), type its exact `base_username`,
    and explicitly affirm permission before clicking **Review import**.
 4. Review the unverified source status categories and, if useful, download the
    **de-identified** local summary receipt.
@@ -34,21 +34,21 @@ assert authorization or retrieve live profiles.
 
 | Input | Trust and interpretation |
 | --- | --- |
-| \`scan_summary.total_sites_scanned\` | Third-party claim, not reverified |
-| \`variations[handle].sites[site].status\` | Scanner report, **not** proof an identity exists |
-| \`confidence\` | Scanner score, not independently validated probability |
-| \`Found\` | Scanner-reported public presence; ownership remains unknown |
-| \`Maybe\` | Hypothesis requiring authorized manual review |
-| \`Not Found\` | No match reported; not evidence of absence |
+| `scan_summary.total_sites_scanned` | Third-party claim, not reverified |
+| `variations[handle].sites[site].status` | Scanner report, **not** proof an identity exists |
+| `confidence` | Scanner score, not independently validated probability |
+| `Found` | Scanner-reported public presence; ownership remains unknown |
+| `Maybe` | Hypothesis requiring authorized manual review |
+| `Not Found` | No match reported; not evidence of absence |
 | Other status / missing score | **UNKNOWN**, never quietly converted into PASS |
 | Consent checkbox | User assertion; not a signed ownership proof |
 
-ALIENS EYE can omit negative site rows with \`--only-found\`. The reviewer
+ALIENS EYE can omit negative site rows with `--only-found`. The reviewer
 distinguishes **reported sites scanned** from **rows imported**, and never
 converts omitted rows to Not Found.
 
 Parser accepts the upstream JSON export structure:
-\`{ "scan_summary": {...}, "variations": { "<handle>": { "sites": { "<site>": { "status": "...", "confidence": 0, "url": "..." } } } } }\`.
+`{ "scan_summary": {...}, "variations": { "<handle>": { "sites": { "<site>": { "status": "...", "confidence": 0, "url": "..." } } } } }`.
 
 Reports are limited to 2 MB, 256 variations, and 12,000 site rows. Only
 safe external HTTPS URLs without embedded credentials render as outbound links.
@@ -71,11 +71,11 @@ None of these future features is claimed as delivered by R14.
 
 ## Test
 
-\`\`\`sh
+```sh
 npm ci
-npm test -- --run src/lib/identity.test.ts
+npm test -- src/lib/identity.test.ts
 npm run build
-\`\`\`
+```
 
 R14 does not authenticate imported reports or verify control of the inspected
 identity. **Ledger above ego:** a report isn't a warrant, and a username is not
