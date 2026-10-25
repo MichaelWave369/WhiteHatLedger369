@@ -14,6 +14,7 @@ import CustodyPanel from './CustodyPanel'
 import IncidentPanel from './IncidentPanel'
 import RecoveryPanel from './RecoveryPanel'
 import PlurPanel from './PlurPanel'
+import IdentityPanel from './IdentityPanel'
 
 type Filter = 'all' | 'review' | 'active' | 'archived'
 type FetchState = 'loading' | 'ready' | 'error'
@@ -161,7 +162,7 @@ export default function App() {
           <div className="brand-mark"><Mark /></div>
           <div><div className="brand-name">WHITEHAT<span>LEDGER</span><b>369</b></div><div className="brand-caption">ETHICAL REVERSE LAB</div></div>
         </a>
-        <div className="header-right"><span className="header-dot" /> READ-ONLY / PUBLIC DATA <span className="header-version">R13 · PLUR DIVISION</span></div>
+        <div className="header-right"><span className="header-dot" /> READ-ONLY / PUBLIC DATA <span className="header-version">R14 · IDENTITY SHIELD</span></div>
       </header>
 
       <main className="shell">
@@ -233,8 +234,10 @@ export default function App() {
 
         <PlurPanel />
 
+        <IdentityPanel />
+
         <section className="repository-section" aria-labelledby="repository-title">
-          <div className="panel-heading"><div><span className="section-index">16 / CATALOG</span><h2 id="repository-title">Asset registry</h2></div><span className="meta-label">{state === 'ready' ? `${filtered.length} MATCHES` : 'AWAITING VERIFIED SNAPSHOT'}</span></div>
+          <div className="panel-heading"><div><span className="section-index">17 / CATALOG</span><h2 id="repository-title">Asset registry</h2></div><span className="meta-label">{state === 'ready' ? `${filtered.length} MATCHES` : 'AWAITING VERIFIED SNAPSHOT'}</span></div>
           <div className="catalog-tools">
             <div className="search-wrap"><span aria-hidden="true">⌕</span><input aria-label="Search repositories" placeholder="Search names, descriptions, languages…" value={search} onChange={(event) => { setSearch(event.target.value); setPage(1) }} disabled={state !== 'ready'} /></div>
             <select aria-label="Filter language" value={language} onChange={(event) => { setLanguage(event.target.value); setPage(1) }} disabled={state !== 'ready'}><option value="all">All languages</option>{languages.map((l) => <option key={l} value={l}>{l}</option>)}</select>
@@ -251,12 +254,12 @@ export default function App() {
         </section>
 
         <section className="next-stage">
-          <span className="section-index">17 / NEXT MISSION</span><h2>From unsigned review proposals to authentic owner consent.</h2>
+          <span className="section-index">18 / NEXT MISSION</span><h2>From unsigned review proposals to authentic owner consent.</h2>
           <p>R12 lets operators draft a narrowly scoped recovery proposal anchored to immutable incident and candidate references. Its SHA-256 fingerprint checks draft consistency but cannot sign or authorize an action. Next: independently verifiable owner approvals, immutable evidence custody, verified candidate provenance, and a separate reviewed execution gateway.</p>
-          <div className="stage-steps"><span><b>R0</b> INVENTORY</span><span><b>R1</b> ADVISORIES</span><span><b>R2</b> GAUNTLET</span><span><b>R3</b> MINOTAUR</span><span><b>R4</b> SIGNED FIXTURES</span><span><b>R5</b> SIGNED RECEIPTS</span><span><b>R6</b> POLICY ENGINE</span><span><b>R7</b> DEPENDENCIES</span><span><b>R8</b> BUILD HASHES</span><span><b>R9</b> ATTESTATIONS</span><span><b>R10</b> CUSTODY</span><span><b>R11</b> INCIDENTS</span><span><b>R12</b> RECOVERY REVIEW</span><span><b>R13</b> PLUR DIVISION</span></div>
+          <div className="stage-steps"><span><b>R0</b> INVENTORY</span><span><b>R1</b> ADVISORIES</span><span><b>R2</b> GAUNTLET</span><span><b>R3</b> MINOTAUR</span><span><b>R4</b> SIGNED FIXTURES</span><span><b>R5</b> SIGNED RECEIPTS</span><span><b>R6</b> POLICY ENGINE</span><span><b>R7</b> DEPENDENCIES</span><span><b>R8</b> BUILD HASHES</span><span><b>R9</b> ATTESTATIONS</span><span><b>R10</b> CUSTODY</span><span><b>R11</b> INCIDENTS</span><span><b>R12</b> RECOVERY REVIEW</span><span><b>R13</b> PLUR DIVISION</span><span><b>R14</b> IDENTITY SHIELD</span></div>
         </section>
       </main>
-      <footer className="site-footer shell"><div><Mark size={22} /> WHITEHATLEDGER369 <span>·</span> LEDGER ABOVE EGO.</div><p>R0 WATCHTOWER · R1 SENTINEL · R2 GAUNTLET · R3 MINOTAUR · R4 AUTHORITY · R5 EVIDENCE · R6 GUARDIAN · R7 LOCKFILE · R8 ARTIFACT · R9 ATTESTATION · R10 CUSTODY · R11 INCIDENTS · R12 RECOVERY REVIEW · R13 PLUR DIVISION. NOT CERTIFIED SECURE. <a href="https://github.com/MichaelWave369/WhiteHatLedger369" target="_blank" rel="noopener noreferrer">SOURCE ↗</a></p></footer>
+      <footer className="site-footer shell"><div><Mark size={22} /> WHITEHATLEDGER369 <span>·</span> LEDGER ABOVE EGO.</div><p>R0 WATCHTOWER · R1 SENTINEL · R2 GAUNTLET · R3 MINOTAUR · R4 AUTHORITY · R5 EVIDENCE · R6 GUARDIAN · R7 LOCKFILE · R8 ARTIFACT · R9 ATTESTATION · R10 CUSTODY · R11 INCIDENTS · R12 RECOVERY REVIEW · R13 PLUR DIVISION · R14 IDENTITY SHIELD. NOT CERTIFIED SECURE. <a href="https://github.com/MichaelWave369/WhiteHatLedger369" target="_blank" rel="noopener noreferrer">SOURCE ↗</a></p></footer>
     </div>
   )
 }
